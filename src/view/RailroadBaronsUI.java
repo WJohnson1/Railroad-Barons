@@ -83,7 +83,6 @@ public class RailroadBaronsUI extends Application
             System.err.println(USAGE);
             System.exit(1);
         }
-
         try {
             controller.loadMapMaker(params.get(0));
             controller.loadRailroadBaronsGame(params.get(1));
