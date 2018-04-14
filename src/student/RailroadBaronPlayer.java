@@ -1,6 +1,7 @@
 package student;
 
 import model.*;
+import model.Route;
 
 import java.util.Collection;
 
@@ -63,12 +64,12 @@ public class RailroadBaronPlayer implements Player {
     }
 
     @Override
-    public boolean canClaimRoute(Route route) {
+    public boolean canClaimRoute(model.Route route) {
         return false;
     }
 
     @Override
-    public void claimRoute(Route route) throws RailroadBaronsException {
+    public void claimRoute(model.Route route) throws RailroadBaronsException {
 
     }
 
