@@ -10,6 +10,10 @@ import java.util.Collection;
 
 public class Game implements model.RailroadBarons{
      private RailroadMap railroadMap;
+
+     public Game(){
+
+     }
      public Game(String mMaker, String rBarons){
 
      }
