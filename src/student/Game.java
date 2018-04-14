@@ -64,12 +64,14 @@ public class Game implements model.RailroadBarons{
 
      @Override
      public void endTurn() {
-
+        players.add(getCurrentPlayer());
+         ((RailroadBaronPlayer) getCurrentPlayer()).changeAlreadyClaimed();
+         players.remove(getCurrentPlayer());
      }
 
      @Override
      public Player getCurrentPlayer() {
-          return null;
+         return ((ArrayList<Player>) players).get(0);
      }
 
      @Override
