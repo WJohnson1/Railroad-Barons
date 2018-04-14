@@ -153,7 +153,7 @@ public class Route implements model.Route {
      * this route, and false otherwise.
      */
     @Override
-    public boolean includesCoordinate(Space space) {
+    public boolean includesCoordinate(model.Space space) {
         for (model.Track track : getTracks()){
             if (track.collocated(space)){
                 return true;
