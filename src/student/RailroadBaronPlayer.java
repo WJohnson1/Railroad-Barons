@@ -5,9 +5,21 @@ import model.*;
 import java.util.Collection;
 
 public class RailroadBaronPlayer implements Player {
+    private Baron baron;
     public  RailroadBaronPlayer(int i){
         switch (i){
-
+            case 0:
+                this.baron = Baron.BLUE;
+                break;
+            case 1:
+                this.baron = Baron.GREEN;
+                break;
+            case 2:
+                this.baron = Baron.RED;
+                break;
+            case 3:
+                this.baron = Baron.YELLOW;
+                break;
         }
     }
     @Override
@@ -27,7 +39,7 @@ public class RailroadBaronPlayer implements Player {
 
     @Override
     public Baron getBaron() {
-        return null;
+        return this.baron;
     }
 
     @Override

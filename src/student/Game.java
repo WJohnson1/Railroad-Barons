@@ -10,17 +10,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class Game implements model.RailroadBarons{
-     private RailroadMap railroadMap;
+     private MapMaker railroadMap;
      private Collection<Player> players = new ArrayList<>();
      public Game(){
 
      }
-     public Game(String mMaker, String rBarons){
 
-     }
-     public Game(String mMaker, String rBarons,String map){
-
-     }
 
      @Override
      public void addRailroadBaronsObserver(RailroadBaronsObserver observer) {
@@ -28,7 +23,7 @@ public class Game implements model.RailroadBarons{
             Player p = new RailroadBaronPlayer(i);
             players.add(p);
         }
-
+          observer.turnStarted(this,(Player) (players.toArray())[0]);
          //Player player = (Player) observer;
         //players.add(player);
      }
