@@ -5,12 +5,11 @@ import model.Deck;
 import model.Player;
 import model.RailroadBaronsException;
 import model.RailroadBaronsObserver;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class Game implements model.RailroadBarons{
-     private MapMaker railroadMap;
+     //private MapMaker railroadMap;
      private Collection<Player> players = new ArrayList<>();
      public Game(){
 
