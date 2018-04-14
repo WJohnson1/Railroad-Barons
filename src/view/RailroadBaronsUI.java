@@ -133,7 +133,7 @@ public class RailroadBaronsUI extends Application
         MenuItem startAGame = new MenuItem("Start a Game...");
         startAGame.addEventHandler(ActionEvent.ACTION, e -> {
             startAGame();
-        });
+    });
 
         file.getItems().add(startAGame);
         menu.getMenus().add(file);
