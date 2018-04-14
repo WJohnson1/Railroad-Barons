@@ -10,7 +10,7 @@ public class RailroadMap implements model.RailroadMap {
     private int rows;
     private int columns;
     private model.Space[][] Sections;
-    private ArrayList<RailroadMapObserver> observers;
+    private ArrayList<RailroadMapObserver> observers = new ArrayList<>();
     private ArrayList<model.Route> routes = new ArrayList<>();
 
 
