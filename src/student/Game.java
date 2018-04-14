@@ -6,11 +6,12 @@ import model.Player;
 import model.RailroadBaronsException;
 import model.RailroadBaronsObserver;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Game implements model.RailroadBarons{
      private RailroadMap railroadMap;
-
+     private Collection<Player> players = new ArrayList<>();
      public Game(){
 
      }
@@ -21,10 +22,15 @@ public class Game implements model.RailroadBarons{
 
      }
 
-
      @Override
      public void addRailroadBaronsObserver(RailroadBaronsObserver observer) {
+         for (int i = 0; i<4;i++){
+            Player p = new RailroadBaronPlayer(i);
+            players.add(p);
+        }
 
+         //Player player = (Player) observer;
+        //players.add(player);
      }
 
      @Override
@@ -74,13 +80,14 @@ public class Game implements model.RailroadBarons{
 
      @Override
      public Collection<Player> getPlayers() {
-          return null;
+        return  this.players;
      }
 
      @Override
      public boolean gameIsOver() {
           return false;
      }
+
 
      public static void main(String[] args) {
           Application.launch(view.RailroadBaronsUI.class,args);

@@ -5,6 +5,11 @@ import model.*;
 import java.util.Collection;
 
 public class RailroadBaronPlayer implements Player {
+    public  RailroadBaronPlayer(int i){
+        switch (i){
+
+        }
+    }
     @Override
     public void reset(Card... dealt) {
 
@@ -69,4 +74,5 @@ public class RailroadBaronPlayer implements Player {
     public boolean canContinuePlaying(int shortestUnclaimedRoute) {
         return false;
     }
+
 }
