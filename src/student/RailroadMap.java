@@ -20,7 +20,7 @@ public class RailroadMap implements model.RailroadMap {
         this.columns = columns;
         this.Sections = new Space[rows][columns];
         for (int row = 0; row < rows; row++){
-            for (int column = 0; column < columns; columns++){
+            for (int column = 0; column < columns; column++){
                 Sections[row][column] = new student.Space(row, column);
             }
         }
@@ -122,14 +122,6 @@ public class RailroadMap implements model.RailroadMap {
     public void routeClaimed(model.Route route) {
         model.Station origin = route.getOrigin();
         model.Station destination =  route.getDestination();
-        //model.Space origin1 = origin;
-        //model.Space destination1 = destination;
-        //System.out.println(origin1.getRow() + " C:" + origin1.getCol());
-        //System.out.println(destination1.getRow() + " C:" + destination1.getCol());
-        System.out.println(Sections.getClass());
-        System.out.println(origin.getClass());
-        //System.out.println(origin1.getClass());
-        //student.Space origin2 = (student.Space) origin1;
         Sections[origin.getRow()][origin.getCol()] = (student.Space) origin;
         Sections[destination.getRow()][destination.getCol()] = (student.Space) destination;
         for (model.Track track : route.getTracks() ){

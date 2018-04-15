@@ -15,11 +15,15 @@ import java.util.Collection;
 
 public class Game implements model.RailroadBarons{
      //private MapMaker railroadMap;
-     private Collection<Player> players = new ArrayList<>();
+     private ArrayList<RailroadBaronsObserver> observers = new ArrayList<>();
+    private Collection<Player> players = new ArrayList<>();
      private student.Deck deck;
      private model.RailroadMap railroadMap;
-     public Game(){
-        deck = new student.Deck();
+     public Game() {
+         for (int i = 0; i < 4; i++) {
+             Player p = new RailroadBaronPlayer(i);
+             players.add(p);
+         }
      }
 
     /**
@@ -37,11 +41,8 @@ public class Game implements model.RailroadBarons{
      */
      @Override
      public void addRailroadBaronsObserver(RailroadBaronsObserver observer) {
-         for (int i = 0; i<4;i++){
-            Player p = new RailroadBaronPlayer(i);
-            players.add(p);
-        }
-          observer.turnStarted(this,(Player) (players.toArray())[0]);
+         observers.add(observer);
+          //observer.turnStarted(this,getCurrentPlayer());
          //Player player = (Player) observer;
         //players.add(player);
      }
@@ -55,7 +56,7 @@ public class Game implements model.RailroadBarons{
      */
      @Override
      public void removeRailroadBaronsObserver(RailroadBaronsObserver observer) {
-
+        observers.remove(observer);
      }
 
     /**
@@ -78,14 +79,11 @@ public class Game implements model.RailroadBarons{
      @Override
      public void startAGameWith(model.RailroadMap map) {
          railroadMap = map;
-         Player p1 = new RailroadBaronPlayer(0);
-         Player p2 = new RailroadBaronPlayer(1);
-         Player p3 = new RailroadBaronPlayer(2);
-         Player p4 = new RailroadBaronPlayer(3);
-         model.Card[] hand1 = new model.Card[4];
-         model.Card[] hand2 = new model.Card[4];
-         model.Card[] hand3 = new model.Card[4];
-         model.Card[] hand4 = new model.Card[4];
+         this.deck = new student.Deck();
+         model.Card[] hand1 = new model.Card[5];
+         model.Card[] hand2 = new model.Card[5];
+         model.Card[] hand3 = new model.Card[5];
+         model.Card[] hand4 = new model.Card[5];
          for ( int i = 0;i<4;i++){
              model.Card c = deck.drawACard();
              model.Card c1 = deck.drawACard();
@@ -96,16 +94,12 @@ public class Game implements model.RailroadBarons{
              hand3[i] = c2;
              hand4[i] = c3;
          }
-         p1.reset(hand1);
-         p2.reset(hand2);
-         p3.reset(hand3);
-         p4.reset(hand4);
-         players.add(p1);
-         players.add(p2);
-         players.add(p3);
-         players.add(p4);
+         ((RailroadBaronPlayer[])players.toArray())[0].reset(hand1);
+         ((RailroadBaronPlayer[])players.toArray())[1].reset(hand2);
+         ((RailroadBaronPlayer[])players.toArray())[2].reset(hand3);
+         ((RailroadBaronPlayer[])players.toArray())[3].reset(hand4);
          Pair p = new Pair(deck.drawACard(),deck.drawACard());
-         p1.startTurn(p);
+         getCurrentPlayer().startTurn(p);
      }
 
     /**
@@ -126,6 +120,35 @@ public class Game implements model.RailroadBarons{
      @Override
      public void startAGameWith(model.RailroadMap map, Deck deck) {
         railroadMap = map;
+        this.deck = (student.Deck) deck;
+         Player p1 = new RailroadBaronPlayer(0);
+         Player p2 = new RailroadBaronPlayer(1);
+         Player p3 = new RailroadBaronPlayer(2);
+         Player p4 = new RailroadBaronPlayer(3);
+         model.Card[] hand1 = new model.Card[50];
+         model.Card[] hand2 = new model.Card[50];
+         model.Card[] hand3 = new model.Card[50];
+         model.Card[] hand4 = new model.Card[50];
+         for ( int i = 0;i<4;i++){
+             model.Card c = this.deck.drawACard();
+             model.Card c1 = this.deck.drawACard();
+             model.Card c2 = this.deck.drawACard();
+             model.Card c3 = this.deck.drawACard();
+             hand1[i] = c;
+             hand2[i] = c1;
+             hand3[i] = c2;
+             hand4[i] = c3;
+         }
+         p1.reset(hand1);
+         p2.reset(hand2);
+         p3.reset(hand3);
+         p4.reset(hand4);
+         players.add(p1);
+         players.add(p2);
+         players.add(p3);
+         players.add(p4);
+         Pair p = new Pair(deck.drawACard(),deck.drawACard());
+         p1.startTurn(p);
      }
 
     /**
@@ -245,7 +268,8 @@ public class Game implements model.RailroadBarons{
 
 
      public static void main(String[] args) {
-          Application.launch(view.RailroadBaronsUI.class,args);
+         System.out.println("help");
+         Application.launch(view.RailroadBaronsUI.class,args);
      }
 }
 

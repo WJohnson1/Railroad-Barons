@@ -4,6 +4,7 @@ import model.Card;
 
 import java.util.ArrayList;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -17,6 +18,7 @@ public class Deck implements model.Deck{
             Card c = s.getValue();
             cards.add(c);
         }
+        Collections.shuffle(cards);
     }
 
     /**
@@ -38,12 +40,14 @@ public class Deck implements model.Deck{
     @Override
     public Card drawACard() {
         int i = 0;
-        while (i<numCards);
-            if (cards.get(i)!= Card.NONE){
+        while (i<numCards){
+            if (cards.get(i)!= Card.NONE) {
                 cards.remove(i);
                 cards.add(Card.NONE);
                 currentCardNum--;
                 return cards.get(i);
+            }
+            i++;
         }
         return Card.NONE;
     }

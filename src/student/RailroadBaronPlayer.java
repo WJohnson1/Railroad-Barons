@@ -103,7 +103,11 @@ public class RailroadBaronPlayer implements Player {
     public void startTurn(Pair dealt) {
         this.lastTwoCards = dealt;
         int i = 0;
-        //+ dealt;
+        while (hand[i]!=null || hand[i]!=Card.NONE){
+            i++;
+        }
+        hand[i] = dealt.getFirstCard();
+        hand[i+1] = dealt.getSecondCard();
     }
 
     /**
