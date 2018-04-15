@@ -94,10 +94,10 @@ public class Game implements model.RailroadBarons{
              hand3[i] = c2;
              hand4[i] = c3;
          }
-         ((RailroadBaronPlayer[])players.toArray())[0].reset(hand1);
-         ((RailroadBaronPlayer[])players.toArray())[1].reset(hand2);
-         ((RailroadBaronPlayer[])players.toArray())[2].reset(hand3);
-         ((RailroadBaronPlayer[])players.toArray())[3].reset(hand4);
+         ((Player)(players.toArray()[0])).reset(hand1);
+         ((Player)(players.toArray()[1])).reset(hand2);
+         ((Player)(players.toArray()[2])).reset(hand3);
+         ((Player)(players.toArray()[3])).reset(hand4);
          Pair p = new Pair(deck.drawACard(),deck.drawACard());
          getCurrentPlayer().startTurn(p);
      }
