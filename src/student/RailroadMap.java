@@ -36,6 +36,7 @@ public class RailroadMap implements model.RailroadMap {
      */
     @Override
     public void addObserver(RailroadMapObserver observer) {
+        //observer.routeClaimed(this,routes.get(routes.size()-1));
         this.observers.add(observer);
     }
 
@@ -122,6 +123,9 @@ public class RailroadMap implements model.RailroadMap {
             Sections[track.getRow()][track.getCol()] = (student.Space) track;
         }
         routes.add(route);
+        for (RailroadMapObserver observer: observers){
+            observer.routeClaimed(this,route);
+        }
     }
 
     /**

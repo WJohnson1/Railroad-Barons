@@ -72,6 +72,7 @@ public class RailroadBaronPlayer implements Player {
     @Override
     public void addPlayerObserver(model.PlayerObserver observer) {
         observers.add(observer);
+
         observer.playerChanged(this);
     }
 
