@@ -237,34 +237,35 @@ public class RailroadBaronPlayer implements Player {
         int w = 0;
         int a = 0;
         System.out.println(hand.toString());
-        for (Card c: hand){
-            if (this.countCardsInHand(c)>= route.getLength() & !c.equals(Card.WILD)){
-                for (int i = 0; i<hand.size();i++){
-                    if (hand.get(i) == null){
+        for (Card c: hand) {
+            if (this.countCardsInHand(c) >= route.getLength() & !c.equals(Card.WILD)) {
+                for (int i = 0; i < hand.size(); i++) {
+                    if (hand.get(i) == null) {
                         break;
-                    }
-                    else if (hand.get(i).equals(c) && a < route.getLength()){
-                        hand.set(i,Card.NONE);
+                    } else if (hand.get(i).equals(c) && a < route.getLength()) {
+                        hand.set(i, Card.NONE);
                         a++;
                     }
                 }
                 completed = true;
             }
-            else if((this.countCardsInHand(c) + this.countCardsInHand(Card.WILD))>= route.getLength()){
-                for (int i = 0; i<hand.size();i++){
-                    if (hand.get(i) == null){
-                        break;
+        }
+        if (!completed) {
+            for (Card c : hand) {
+                if ((this.countCardsInHand(c) + this.countCardsInHand(Card.WILD)) >= route.getLength()) {
+                    for (int i = 0; i < hand.size(); i++) {
+                        if (hand.get(i) == null) {
+                            break;
+                        } else if (hand.get(i).equals(c) && a < route.getLength()) {
+                            hand.set(i, Card.NONE);
+                            a++;
+                        } else if (hand.get(i).equals(Card.WILD) && w < 1) {
+                            hand.set(i, Card.NONE);
+                            w++;
+                        }
                     }
-                    else if (hand.get(i).equals(c) && a < route.getLength()){
-                        hand.set(i,Card.NONE);
-                        a++;
-                    }
-                    else if (hand.get(i).equals(Card.WILD) && w <1){
-                        hand.set(i,Card.NONE);
-                        w++;
-                    }
+                    completed = true;
                 }
-                completed = true;
             }
         }
         if (!completed){
@@ -272,6 +273,9 @@ public class RailroadBaronPlayer implements Player {
         }
         this.trainPieces = this.trainPieces-route.getLength();
         claimedRoutes.add(route);
+        for (PlayerObserver playerObserver: observers){
+            playerObserver.playerChanged(this);
+        }
         route.claim(this.baron);
         alreadyClaimed = true;
         score+=route.getPointValue();
