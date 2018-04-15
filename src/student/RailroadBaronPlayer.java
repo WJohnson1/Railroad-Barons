@@ -12,7 +12,7 @@ public class RailroadBaronPlayer implements Player {
     private model.Pair lastTwoCards = new student.Pair(model.Card.NONE, model.Card.NONE);
     private model.Card[] hand = new model.Card[4];
     private  int score = 0;
-    private int trainPieces = 45;
+    private int trainPieces = 50;
     private boolean alreadyClaimed = false;
     private Set<model.PlayerObserver> observers = new HashSet<>();
     private  Collection<model.Route> claimedRoutes = Collections.emptyList();
@@ -50,7 +50,7 @@ public class RailroadBaronPlayer implements Player {
      */
     @Override
     public void reset(model.Card... dealt) {
-        trainPieces = 45;
+        trainPieces = 50;
         hand = dealt;
         score = 0;
         claimedRoutes = Collections.emptyList();

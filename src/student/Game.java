@@ -7,6 +7,8 @@ import model.Deck;
 import model.RailroadMap;
 import model.Route;
 import model.Track;
+import view.Console;
+import view.TextAreaConsole;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,8 +16,10 @@ import java.util.Collection;
 public class Game implements model.RailroadBarons{
      //private MapMaker railroadMap;
      private Collection<Player> players = new ArrayList<>();
+     private student.Deck deck;
+     private model.RailroadMap railroadMap;
      public Game(){
-
+        deck = new student.Deck();
      }
 
     /**
@@ -73,7 +77,29 @@ public class Game implements model.RailroadBarons{
      */
      @Override
      public void startAGameWith(model.RailroadMap map) {
-
+         railroadMap = map;
+         Player p1 = new RailroadBaronPlayer(0);
+         Player p2 = new RailroadBaronPlayer(1);
+         Player p3 = new RailroadBaronPlayer(2);
+         Player p4 = new RailroadBaronPlayer(3);
+         model.Card[] hand1 = new model.Card[4];
+         model.Card[] hand2 = new model.Card[4];
+         model.Card[] hand3 = new model.Card[4];
+         model.Card[] hand4 = new model.Card[4];
+         for ( int i = 0;i<4;i++){
+             model.Card c = deck.drawACard();
+             model.Card c1 = deck.drawACard();
+             model.Card c2 = deck.drawACard();
+             model.Card c3 = deck.drawACard();
+             hand1[i] = c;
+             hand2[i] = c1;
+             hand3[i] = c2;
+             hand4[i] = c3;
+         }
+         p1.reset(hand1);
+         p2.reset(hand2);
+         p3.reset(hand3);
+         p4.reset(hand4);
      }
 
     /**
@@ -93,7 +119,7 @@ public class Game implements model.RailroadBarons{
      */
      @Override
      public void startAGameWith(model.RailroadMap map, Deck deck) {
-
+        railroadMap = map;
      }
 
     /**
@@ -104,7 +130,7 @@ public class Game implements model.RailroadBarons{
      */
      @Override
      public model.RailroadMap getRailroadMap() {
-          return null;
+          return railroadMap;
      }
 
     /**
@@ -116,7 +142,7 @@ public class Game implements model.RailroadBarons{
      */
      @Override
      public int numberOfCardsRemaining() {
-          return 0;
+          return deck.numberOfCardsRemaining();
      }
 
     /**
@@ -133,7 +159,8 @@ public class Game implements model.RailroadBarons{
      */
      @Override
      public boolean canCurrentPlayerClaimRoute(int row, int col) {
-          return false;
+         Player player = this.getCurrentPlayer();
+         return player.canClaimRoute(getRailroadMap().getRoute(row,col));
      }
 
     /**
@@ -147,6 +174,7 @@ public class Game implements model.RailroadBarons{
      */
      @Override
      public void claimRoute(int row, int col) throws RailroadBaronsException {
+        getCurrentPlayer().claimRoute(getRailroadMap().getRoute(row,col));
 
      }
 
@@ -194,7 +222,19 @@ public class Game implements model.RailroadBarons{
      */
      @Override
      public boolean gameIsOver() {
-          return false;
+         boolean a = true;
+         for (Player player: players){
+             if (player.canContinuePlaying(getRailroadMap().getLengthOfShortestUnclaimedRoute())){
+                 a = false;
+             }
+
+         }
+         for (student.Route route:((student.Route[]) getRailroadMap().getRoutes().toArray())){
+             if (route.getBaron()==Baron.UNCLAIMED){
+                 a = false;
+             }
+         }
+         return a;
      }
 
 

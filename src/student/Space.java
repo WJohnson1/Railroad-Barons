@@ -1,9 +1,15 @@
 package student;
 
-public class Space implements model.Space{
+import model.RailroadMap;
+import model.RailroadMapObserver;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class Space implements model.Space {
     private int row;
     private int column;
-
+    private Set<RailroadMapObserver> observers = new HashSet<>();
     public Space(int row, int column) {
         this.row = row;
         this.column = column;
@@ -41,5 +47,9 @@ public class Space implements model.Space{
     @Override
     public boolean collocated(model.Space other) {
         return other.getCol() == this.column && other.getRow() == this.row;
+    }
+
+    public void notifyObservers () {
+
     }
 }
