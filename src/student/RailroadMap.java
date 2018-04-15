@@ -125,7 +125,6 @@ public class RailroadMap implements model.RailroadMap {
         Sections[origin.getRow()][origin.getCol()] = (student.Space) origin;
         Sections[destination.getRow()][destination.getCol()] = (student.Space) destination;
         for (model.Track track : route.getTracks() ){
-            System.out.println(track);
             Sections[track.getRow()][track.getCol()] = (student.Space) track;
         }
         routes.add(route);

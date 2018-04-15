@@ -100,10 +100,10 @@ public class Route implements model.Route {
     @Override
     public int getLength() {
         if (getOrientation() == Orientation.HORIZONTAL){
-            return Math.abs(getOrigin().getCol() - getDestination().getCol()-1);
+            return Math.abs(getOrigin().getCol() - getDestination().getCol());
         }
         else{
-            return Math.abs(getOrigin().getRow() - getDestination().getRow()-1);
+            return Math.abs(getOrigin().getRow() - getDestination().getRow());
         }
     }
 

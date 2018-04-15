@@ -53,7 +53,7 @@ public class RailroadBaronPlayer implements Player {
         trainPieces = 50;
         hand = new ArrayList<>();
         for (int i = 0; i<dealt.length; i++){
-            hand.add(dealt[0]);
+            hand.add(dealt[i]);
         }
         score = 0;
         claimedRoutes = Collections.emptyList();
