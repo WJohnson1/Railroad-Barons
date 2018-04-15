@@ -10,30 +10,27 @@ public class Card {
                 value = model.Card.WILD;
                 break;
             case 1:
-                value = model.Card.BACK;
-                break;
-            case 2:
                 value = model.Card.BLACK;
                 break;
-            case 3:
+            case 2:
                 value = model.Card.BLUE;
                 break;
-            case 4:
+            case 3:
                 value = model.Card.GREEN;
                 break;
-            case 5:
+            case 4:
                 value = model.Card.ORANGE;
                 break;
-            case 6:
+            case 5:
                 value = model.Card.PINK;
                 break;
-            case 7:
+            case 6:
                 value = model.Card.RED;
                 break;
-            case 8:
+            case 7:
                 value = model.Card.WHITE;
                 break;
-            case 9:
+            case 8:
                 value = model.Card.YELLOW;
                 break;
         }

@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Deck implements model.Deck{
-    private  static  int numCards = 200;
-    private  static  int currentCardNum = 200;
+    private  static  int numCards = 216;
+    private  static  int currentCardNum = 216;
     private List<Card> cards = new ArrayList<>();
     public Deck(){
         for (int i = 0; i<numCards;i++){
-            student.Card s = new  student.Card(i%10);
+            student.Card s = new  student.Card(i%9);
             Card c = s.getValue();
             cards.add(c);
         }
@@ -29,6 +29,7 @@ public class Deck implements model.Deck{
     public void reset() {
         Deck deck =new Deck();
         this.cards = deck.cards;
+        currentCardNum = numCards;
     }
 
     /**

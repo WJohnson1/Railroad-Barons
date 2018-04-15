@@ -11,8 +11,8 @@ public class RailroadBaronPlayer implements Player {
     private Baron baron;
     private model.Pair lastTwoCards = new student.Pair(model.Card.NONE, model.Card.NONE);
     private ArrayList<model.Card> hand = new ArrayList<>();
-    private  int score = 0;
-    private int trainPieces = 50;
+    private  int score;
+    private int trainPieces;
     private boolean alreadyClaimed = false;
     private Set<model.PlayerObserver> observers = new HashSet<>();
     private  Collection<model.Route> claimedRoutes = Collections.emptyList();
@@ -31,6 +31,9 @@ public class RailroadBaronPlayer implements Player {
                 this.baron = Baron.YELLOW;
                 break;
         }
+        this.trainPieces = 50;
+        this.score = 0;
+
     }
 
     /**

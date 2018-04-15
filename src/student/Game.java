@@ -9,6 +9,7 @@ import model.Route;
 import model.Track;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 public class Game implements model.RailroadBarons{
@@ -17,11 +18,10 @@ public class Game implements model.RailroadBarons{
     private Collection<Player> players = new ArrayList<>();
      private student.Deck deck;
      private model.RailroadMap railroadMap;
+
      public Game() {
-         for (int i = 0; i < 4; i++) {
-             RailroadBaronPlayer p = new RailroadBaronPlayer(i);
-             players.add(p);
-         }
+
+
      }
 
     /**
@@ -39,10 +39,11 @@ public class Game implements model.RailroadBarons{
      */
      @Override
      public void addRailroadBaronsObserver(RailroadBaronsObserver observer) {
+         for (int i = 0; i < 4; i++) {
+             RailroadBaronPlayer p = new RailroadBaronPlayer(i);
+             players.add(p);
+         }
          observers.add(observer);
-          //observer.turnStarted(this,getCurrentPlayer());
-         //Player player = (Player) observer;
-        //players.add(player);
      }
 
     /**
@@ -55,6 +56,7 @@ public class Game implements model.RailroadBarons{
      @Override
      public void removeRailroadBaronsObserver(RailroadBaronsObserver observer) {
         observers.remove(observer);
+        players.removeAll(players);
      }
 
     /**
@@ -96,6 +98,7 @@ public class Game implements model.RailroadBarons{
          ((Player)(players.toArray()[1])).reset(hand2);
          ((Player)(players.toArray()[2])).reset(hand3);
          ((Player)(players.toArray()[3])).reset(hand4);
+
          Pair p = new Pair(deck.drawACard(),deck.drawACard());
          getCurrentPlayer().startTurn(p);
      }
@@ -119,14 +122,17 @@ public class Game implements model.RailroadBarons{
      public void startAGameWith(model.RailroadMap map, Deck deck) {
         railroadMap = map;
         this.deck = (student.Deck) deck;
-         //Player p1 = new RailroadBaronPlayer(0);
-         //Player p2 = new RailroadBaronPlayer(1);
-         //Player p3 = new RailroadBaronPlayer(2);
-         //Player p4 = new RailroadBaronPlayer(3);
-         model.Card[] hand1 = new model.Card[50];
-         model.Card[] hand2 = new model.Card[50];
-         model.Card[] hand3 = new model.Card[50];
-         model.Card[] hand4 = new model.Card[50];
+         model.Card[] hand1 = new model.Card[4];
+         Arrays.fill(hand1,Card.NONE);
+
+         model.Card[] hand2 = new model.Card[4];
+         Arrays.fill(hand2,Card.NONE);
+
+         model.Card[] hand3 = new model.Card[4];
+         Arrays.fill(hand3,Card.NONE);
+
+         model.Card[] hand4 = new model.Card[4];
+         Arrays.fill(hand4,Card.NONE);
          for ( int i = 0;i<4;i++){
              model.Card c = this.deck.drawACard();
              model.Card c1 = this.deck.drawACard();
