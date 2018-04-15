@@ -108,7 +108,6 @@ public class RailroadBaronPlayer implements Player {
     @Override
     public void startTurn(Pair dealt) {
         this.lastTwoCards = dealt;
-        int i = 0;
         hand.add(dealt.getFirstCard());
         hand.add(dealt.getSecondCard());
     }
