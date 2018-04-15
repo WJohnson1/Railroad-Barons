@@ -178,7 +178,6 @@ public class RailroadBaronPlayer implements Player {
     public boolean canClaimRoute(Route route) {
         if (route.getBaron() == Baron.UNCLAIMED){
             if (!alreadyClaimed){
-                System.out.println(route.getLength());
                 if ((this.countCardsInHand(Card.BLACK) + this.countCardsInHand(Card.WILD))>=route.getLength()){
                     return true;
                 }
@@ -236,7 +235,6 @@ public class RailroadBaronPlayer implements Player {
         boolean completed = false;
         int w = 0;
         int a = 0;
-        System.out.println(hand.toString());
         for (Card c: hand) {
             if (this.countCardsInHand(c) >= route.getLength() & !c.equals(Card.WILD)) {
                 for (int i = 0; i < hand.size(); i++) {
