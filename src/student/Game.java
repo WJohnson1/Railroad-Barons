@@ -79,7 +79,7 @@ public class Game implements model.RailroadBarons{
      @Override
      public void startAGameWith(model.RailroadMap map) {
          railroadMap = map;
-         this.deck = new student.Deck();
+         deck.reset();
          model.Card[] hand1 = new model.Card[5];
          model.Card[] hand2 = new model.Card[5];
          model.Card[] hand3 = new model.Card[5];
@@ -127,7 +127,6 @@ public class Game implements model.RailroadBarons{
      @Override
      public void startAGameWith(model.RailroadMap map, Deck deck) {
         railroadMap = map;
-         System.out.println("Deck");
         this.deck = (student.Deck) deck;
          model.Card[] hand1 = new model.Card[4];
          Arrays.fill(hand1,Card.NONE);
