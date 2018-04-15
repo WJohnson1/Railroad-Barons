@@ -10,7 +10,7 @@ import java.util.*;
 public class RailroadBaronPlayer implements Player {
     private Baron baron;
     private model.Pair lastTwoCards = new student.Pair(model.Card.NONE, model.Card.NONE);
-    private model.Card[] hand = new model.Card[50];
+    private ArrayList<model.Card> hand = new ArrayList<>();
     private  int score = 0;
     private int trainPieces = 50;
     private boolean alreadyClaimed = false;
@@ -51,7 +51,10 @@ public class RailroadBaronPlayer implements Player {
     @Override
     public void reset(model.Card... dealt) {
         trainPieces = 50;
-        hand = dealt;
+        hand = new ArrayList<>();
+        for (int i = 0; i<dealt.length; i++){
+            hand.add(dealt[0]);
+        }
         score = 0;
         claimedRoutes = Collections.emptyList();
         lastTwoCards = new student.Pair(Card.NONE,Card.NONE);
@@ -103,11 +106,8 @@ public class RailroadBaronPlayer implements Player {
     public void startTurn(Pair dealt) {
         this.lastTwoCards = dealt;
         int i = 0;
-        while (hand[i]!=null || hand[i]!=Card.NONE){
-            i++;
-        }
-        hand[i] = dealt.getFirstCard();
-        hand[i+1] = dealt.getSecondCard();
+        hand.add(dealt.getFirstCard());
+        hand.add(dealt.getSecondCard());
     }
 
     /**
@@ -134,8 +134,8 @@ public class RailroadBaronPlayer implements Player {
     public int countCardsInHand(model.Card card) {
         if (card != Card.NONE) {
             int count = 0;
-            for (int i = 0; i < hand.length; i++) {
-                if (hand[i] == card) {
+            for (int i = 0; i < hand.size(); i++) {
+                if (hand.get(i) == card) {
                     count++;
                 }
             }
@@ -239,20 +239,20 @@ public class RailroadBaronPlayer implements Player {
         int w = 0;
         for (Card c: hand){
             if (this.countCardsInHand(c)>= route.getLength() & !c.equals(Card.WILD)){
-                for (int i = 0; i<hand.length;i++){
-                    if (hand[i].equals(c)){
-                        hand[i] = Card.NONE;
+                for (int i = 0; i<hand.size();i++){
+                    if (hand.get(i).equals(c)){
+                        hand.set(i,Card.NONE);
                     }
                 }
                 completed = true;
             }
             else if((this.countCardsInHand(c) + this.countCardsInHand(Card.WILD))>= route.getLength()){
-                for (int i = 0; i<hand.length;i++){
-                    if (hand[i].equals(c)){
-                        hand[i] = Card.NONE;
+                for (int i = 0; i<hand.size();i++){
+                    if (hand.get(i).equals(c)){
+                        hand.set(i,Card.NONE);
                     }
-                    else if (hand[i].equals(Card.WILD) && w <1){
-                        hand[i] = Card.NONE;
+                    else if (hand.get(i).equals(Card.WILD) && w <1){
+                        hand.set(i,Card.NONE);
                         w++;
                     }
                 }
