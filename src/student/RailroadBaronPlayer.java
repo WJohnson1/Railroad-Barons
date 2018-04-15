@@ -110,6 +110,7 @@ public class RailroadBaronPlayer implements Player {
         this.lastTwoCards = dealt;
         hand.add(dealt.getFirstCard());
         hand.add(dealt.getSecondCard());
+        this.alreadyClaimed = false;
     }
 
     /**
@@ -260,6 +261,7 @@ public class RailroadBaronPlayer implements Player {
                         } else if (hand.get(i).equals(Card.WILD) && w < 1) {
                             hand.set(i, Card.NONE);
                             w++;
+                            a++;
                         }
                     }
                     completed = true;

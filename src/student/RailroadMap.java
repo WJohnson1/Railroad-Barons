@@ -124,7 +124,6 @@ public class RailroadMap implements model.RailroadMap {
         routes.add(route);
         for (RailroadMapObserver observer: observers){
             observer.routeClaimed(this,route);
-            observer.notify();
         }
     }
 

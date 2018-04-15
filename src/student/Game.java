@@ -56,7 +56,7 @@ public class Game implements model.RailroadBarons{
      @Override
      public void removeRailroadBaronsObserver(RailroadBaronsObserver observer) {
         observers.remove(observer);
-        players.removeAll(players);
+        //players.removeAll(players);
      }
 
     /**
@@ -80,10 +80,10 @@ public class Game implements model.RailroadBarons{
      public void startAGameWith(model.RailroadMap map) {
          railroadMap = map;
          deck.reset();
-         model.Card[] hand1 = new model.Card[5];
-         model.Card[] hand2 = new model.Card[5];
-         model.Card[] hand3 = new model.Card[5];
-         model.Card[] hand4 = new model.Card[5];
+         model.Card[] hand1 = new model.Card[4];
+         model.Card[] hand2 = new model.Card[4];
+         model.Card[] hand3 = new model.Card[4];
+         model.Card[] hand4 = new model.Card[4];
          for ( int i = 0;i<4;i++){
              model.Card c = deck.drawACard();
              model.Card c1 = deck.drawACard();
@@ -209,9 +209,8 @@ public class Game implements model.RailroadBarons{
      */
      @Override
      public void claimRoute(int row, int col) throws RailroadBaronsException {
-         System.out.println("Row: " + row + " Column: " + col);
         getCurrentPlayer().claimRoute(getRailroadMap().getRoute(row,col));
-
+        getRailroadMap().routeClaimed(getRailroadMap().getRoute(row,col));
 
      }
 
@@ -226,12 +225,20 @@ public class Game implements model.RailroadBarons{
         Player p = getCurrentPlayer();
          ((RailroadBaronPlayer) getCurrentPlayer()).changeAlreadyClaimed();
          players.remove(getCurrentPlayer());
-         ((RailroadBaronPlayer) p).changeAlreadyClaimed();
+         //((RailroadBaronPlayer) p).changeAlreadyClaimed();
          players.add(p);
-         Pair pair = new Pair(this.deck.drawACard(),this.deck.drawACard());
-         getCurrentPlayer().startTurn(pair);
-         for (RailroadBaronsObserver ob : this.observers){
-             ob.turnStarted(this, getCurrentPlayer());
+         if (!this.gameIsOver()) {
+             Pair pair = new Pair(this.deck.drawACard(), this.deck.drawACard());
+             getCurrentPlayer().startTurn(pair);
+             for (RailroadBaronsObserver ob : this.observers) {
+                 ob.turnStarted(this, getCurrentPlayer());
+             }
+         }
+         else{
+             for (RailroadBaronsObserver ob : this.observers){
+                 ob.gameOver(this, getCurrentPlayer());
+                this.removeRailroadBaronsObserver(ob);
+             }
          }
      }
 
@@ -272,21 +279,19 @@ public class Game implements model.RailroadBarons{
      public boolean gameIsOver() {
          boolean a = true;
          for (Player player: players){
-             System.out.println(getRailroadMap());
              if (player.canContinuePlaying(getRailroadMap().getLengthOfShortestUnclaimedRoute())){
                  a = false;
              }
 
          }
-         for (student.Route route:((student.Route[]) getRailroadMap().getRoutes().toArray())){
+         for (model.Route route: getRailroadMap().getRoutes()){
              if (route.getBaron()==Baron.UNCLAIMED){
                  a = false;
              }
          }
          if (a){
-             for (RailroadBaronsObserver ob : this.observers){
-                 ob.gameOver(this, getCurrentPlayer());
-             }
+             System.out.println("Game Over");
+
          }
          return a;
      }
