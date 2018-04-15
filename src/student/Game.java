@@ -194,7 +194,19 @@ public class Game implements model.RailroadBarons{
      */
      @Override
      public boolean gameIsOver() {
-          return false;
+         boolean a = true;
+         for (Player player: players){
+             if (player.canContinuePlaying(getRailroadMap().getLengthOfShortestUnclaimedRoute())){
+                 a = false;
+             }
+
+         }
+         for (student.Route route:((student.Route[]) getRailroadMap().getRoutes().toArray())){
+             if (route.getBaron()==Baron.UNCLAIMED){
+                 a = false;
+             }
+         }
+         return a;
      }
 
 
