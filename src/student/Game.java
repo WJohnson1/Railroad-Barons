@@ -7,19 +7,19 @@ import model.Deck;
 import model.RailroadMap;
 import model.Route;
 import model.Track;
+import view.Console;
+import view.TextAreaConsole;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Game implements model.RailroadBarons, RailroadBaronsObserver{
+public class Game implements model.RailroadBarons{
      //private MapMaker railroadMap;
      private Collection<Player> players = new ArrayList<>();
      private student.Deck deck;
-     private student.RailroadMap railroadMap;
+     private model.RailroadMap railroadMap;
      public Game(){
         deck = new student.Deck();
-        railroadMap = new student.RailroadMap(20,25);
-
      }
 
     /**
@@ -77,6 +77,7 @@ public class Game implements model.RailroadBarons, RailroadBaronsObserver{
      */
      @Override
      public void startAGameWith(model.RailroadMap map) {
+         railroadMap = map;
          Player p1 = new RailroadBaronPlayer(0);
          Player p2 = new RailroadBaronPlayer(1);
          Player p3 = new RailroadBaronPlayer(2);
@@ -87,9 +88,18 @@ public class Game implements model.RailroadBarons, RailroadBaronsObserver{
          model.Card[] hand4 = new model.Card[4];
          for ( int i = 0;i<4;i++){
              model.Card c = deck.drawACard();
+             model.Card c1 = deck.drawACard();
+             model.Card c2 = deck.drawACard();
+             model.Card c3 = deck.drawACard();
+             hand1[i] = c;
+             hand2[i] = c1;
+             hand3[i] = c2;
+             hand4[i] = c3;
          }
-         model.Card c = deck.drawACard();
-         p1.reset();
+         p1.reset(hand1);
+         p2.reset(hand2);
+         p3.reset(hand3);
+         p4.reset(hand4);
      }
 
     /**
@@ -109,7 +119,7 @@ public class Game implements model.RailroadBarons, RailroadBaronsObserver{
      */
      @Override
      public void startAGameWith(model.RailroadMap map, Deck deck) {
-
+        railroadMap = map;
      }
 
     /**
@@ -231,41 +241,5 @@ public class Game implements model.RailroadBarons, RailroadBaronsObserver{
      public static void main(String[] args) {
           Application.launch(view.RailroadBaronsUI.class,args);
      }
-
-    /**
-     * Called when a {@linkplain Player player's} turn has started.
-     *
-     * @param game   The {@link RailroadBarons} game for which a new turn has
-     *               started.
-     * @param player The {@link Player} that has just started a turn.
-     */
-    @Override
-    public void turnStarted(RailroadBarons game, Player player) {
-
-    }
-
-    /**
-     * Called when a {@linkplain Player player's} turn has ended.
-     *
-     * @param game   The {@link RailroadBarons} game for which the current turn
-     *               has ended.
-     * @param player The {@link Player} whose turn has ended.
-     */
-    @Override
-    public void turnEnded(RailroadBarons game, Player player) {
-
-    }
-
-    /**
-     * Called when the {@linkplain RailroadBarons Railroad Barons game} is
-     * over.
-     *
-     * @param game   The {@link RailroadBarons} game that has ended.
-     * @param winner The winning {@link Player}.
-     */
-    @Override
-    public void gameOver(RailroadBarons game, Player winner) {
-
-    }
 }
 
