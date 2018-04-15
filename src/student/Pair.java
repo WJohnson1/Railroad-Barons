@@ -10,11 +10,23 @@ public class Pair implements model.Pair{
         secondCard = second;
     }
 
+    /**
+     * Returns the first {@linkplain Card card} in the pair. Note that, if the
+     * game deck is empty, the value of this card may be {@link Card#NONE}.
+     *
+     * @return The first {@link Card} in the pair.
+     */
     @Override
     public Card getFirstCard() {
         return this.firstCard;
     }
 
+    /**
+     * Returns the second {@linkplain Card card} in the pair. if the
+     * game deck is empty, the value of this card may be {@link Card#NONE}.
+     *
+     * @return The second {@link Card} in the pair.
+     */
     @Override
     public Card getSecondCard() {
         return this.secondCard;
