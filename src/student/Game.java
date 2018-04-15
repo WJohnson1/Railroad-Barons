@@ -211,6 +211,9 @@ public class Game implements model.RailroadBarons{
      public void claimRoute(int row, int col) throws RailroadBaronsException {
          System.out.println("Row: " + row + " Column: " + col);
         getCurrentPlayer().claimRoute(getRailroadMap().getRoute(row,col));
+        for (RailroadBaronsObserver ob : observers){
+            ob.
+        }
 
      }
 
