@@ -43,13 +43,7 @@ public class Game implements model.RailroadBarons{
      */
      @Override
      public void addRailroadBaronsObserver(RailroadBaronsObserver observer) {
-
          observers.add(observer);
-         observer.turnStarted(this,getCurrentPlayer());
-         observer.turnEnded(this,getCurrentPlayer());
-         if (this.gameIsOver()){
-             observer.gameOver(this,getCurrentPlayer());
-         }
      }
 
     /**
@@ -104,11 +98,13 @@ public class Game implements model.RailroadBarons{
          ((Player)(players.toArray()[1])).reset(hand2);
          ((Player)(players.toArray()[2])).reset(hand3);
          ((Player)(players.toArray()[3])).reset(hand4);
-         System.out.println("No deck");
+         for (RailroadBaronsObserver ob : this.observers){
+             ob.turnStarted(this, getCurrentPlayer());
+         }
          //Pair p = new Pair(deck.drawACard(),deck.drawACard());
          //getCurrentPlayer().startTurn(p);
          //this.endTurn();
-         observers.notify();
+
 
      }
 
@@ -222,13 +218,18 @@ public class Game implements model.RailroadBarons{
      */
      @Override
      public void endTurn() {
+         for (RailroadBaronsObserver ob : this.observers){
+             ob.turnEnded(this, getCurrentPlayer());
+         }
         Player p = getCurrentPlayer();
          ((RailroadBaronPlayer) getCurrentPlayer()).changeAlreadyClaimed();
          players.remove(getCurrentPlayer());
          ((RailroadBaronPlayer) p).changeAlreadyClaimed();
          players.add(p);
-         Pair pair = new Pair(this.deck.drawACard(),this.deck.drawACard());
-         getCurrentPlayer().startTurn(pair);
+         //Pair pair = new Pair(this.deck.drawACard(),this.deck.drawACard());
+         for (RailroadBaronsObserver ob : this.observers){
+             ob.turnStarted(this, getCurrentPlayer());
+         }
      }
 
     /**
@@ -277,6 +278,11 @@ public class Game implements model.RailroadBarons{
          for (student.Route route:((student.Route[]) getRailroadMap().getRoutes().toArray())){
              if (route.getBaron()==Baron.UNCLAIMED){
                  a = false;
+             }
+         }
+         if (a){
+             for (RailroadBaronsObserver ob : this.observers){
+                 ob.gameOver(this, getCurrentPlayer());
              }
          }
          return a;

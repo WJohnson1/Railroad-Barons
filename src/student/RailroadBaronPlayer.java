@@ -134,7 +134,7 @@ public class RailroadBaronPlayer implements Player {
      */
     @Override
     public int countCardsInHand(model.Card card) {
-        if (card != Card.NONE) {
+
             int count = 0;
             for (int i = 0; i < hand.size(); i++) {
                 if (hand.get(i) == card) {
@@ -142,10 +142,6 @@ public class RailroadBaronPlayer implements Player {
                 }
             }
             return count;
-        }
-        else{
-            return 0;
-        }
     }
 
     /**
