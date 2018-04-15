@@ -16,12 +16,16 @@ public class Game implements model.RailroadBarons{
      //private MapMaker railroadMap;
      private ArrayList<RailroadBaronsObserver> observers = new ArrayList<>();
     private Collection<Player> players = new ArrayList<>();
-     private student.Deck deck;
+     private student.Deck deck = new student.Deck();
      private model.RailroadMap railroadMap;
 
      public Game() {
-
-
+         for (int i = 0; i < 4; i++) {
+             RailroadBaronPlayer p = new RailroadBaronPlayer(i);
+             players.add(p);
+         }
+         Pair p = new Pair(deck.drawACard(),deck.drawACard());
+         getCurrentPlayer().startTurn(p);
      }
 
     /**
@@ -39,10 +43,7 @@ public class Game implements model.RailroadBarons{
      */
      @Override
      public void addRailroadBaronsObserver(RailroadBaronsObserver observer) {
-         for (int i = 0; i < 4; i++) {
-             RailroadBaronPlayer p = new RailroadBaronPlayer(i);
-             players.add(p);
-         }
+
          observers.add(observer);
      }
 
@@ -98,9 +99,11 @@ public class Game implements model.RailroadBarons{
          ((Player)(players.toArray()[1])).reset(hand2);
          ((Player)(players.toArray()[2])).reset(hand3);
          ((Player)(players.toArray()[3])).reset(hand4);
+         System.out.println("No deck");
+         //Pair p = new Pair(deck.drawACard(),deck.drawACard());
+         //getCurrentPlayer().startTurn(p);
+         //this.endTurn();
 
-         Pair p = new Pair(deck.drawACard(),deck.drawACard());
-         getCurrentPlayer().startTurn(p);
      }
 
     /**
@@ -121,6 +124,7 @@ public class Game implements model.RailroadBarons{
      @Override
      public void startAGameWith(model.RailroadMap map, Deck deck) {
         railroadMap = map;
+         System.out.println("Deck");
         this.deck = (student.Deck) deck;
          model.Card[] hand1 = new model.Card[4];
          Arrays.fill(hand1,Card.NONE);
@@ -212,9 +216,13 @@ public class Game implements model.RailroadBarons{
      */
      @Override
      public void endTurn() {
-        players.add((RailroadBaronPlayer) getCurrentPlayer());
+        Player p = getCurrentPlayer();
          ((RailroadBaronPlayer) getCurrentPlayer()).changeAlreadyClaimed();
          players.remove(getCurrentPlayer());
+         ((RailroadBaronPlayer) p).changeAlreadyClaimed();
+         players.add(p);
+         Pair pair = new Pair(this.deck.drawACard(),this.deck.drawACard());
+         getCurrentPlayer().startTurn(pair);
      }
 
     /**
