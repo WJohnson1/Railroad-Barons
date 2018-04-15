@@ -5,11 +5,12 @@ import model.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class RailroadMap implements model.RailroadMap {
     private int rows;
     private int columns;
-    private model.Space[][] Sections;
+    private student.Space[][] Sections;
     private ArrayList<RailroadMapObserver> observers = new ArrayList<>();
     private ArrayList<model.Route> routes = new ArrayList<>();
 
@@ -20,7 +21,7 @@ public class RailroadMap implements model.RailroadMap {
         this.Sections = new Space[rows][columns];
         for (int row = 0; row < rows; row++){
             for (int column = 0; column < columns; columns++){
-                Sections[row][column] = new Space(row, column);
+                Sections[row][column] = new student.Space(row, column);
             }
         }
     }
@@ -119,14 +120,20 @@ public class RailroadMap implements model.RailroadMap {
      */
     @Override
     public void routeClaimed(model.Route route) {
-        model.Space origin = route.getOrigin();
-        model.Space destination = route.getDestination();
-        System.out.println(origin.getRow() + ' ' + origin.getCol());
-        System.out.println(destination.getRow() + ' ' + destination.getCol());
-        Sections[origin.getRow()][origin.getCol()] = origin;
-        Sections[destination.getRow()][destination.getCol()] = destination;
-        for (model.Space track : route.getTracks() ){
-            Sections[track.getRow()][track.getCol()] = track;
+        model.Station origin = route.getOrigin();
+        model.Station destination =  route.getDestination();
+        //model.Space origin1 = origin;
+        //model.Space destination1 = destination;
+        //System.out.println(origin1.getRow() + " C:" + origin1.getCol());
+        //System.out.println(destination1.getRow() + " C:" + destination1.getCol());
+        System.out.println(Sections.getClass());
+        System.out.println(origin.getClass());
+        //System.out.println(origin1.getClass());
+        //student.Space origin2 = (student.Space) origin1;
+        Sections[origin.getRow()][origin.getCol()] = (student.Space) origin;
+        Sections[destination.getRow()][destination.getCol()] = (student.Space) destination;
+        for (model.Track track : route.getTracks() ){
+            Sections[track.getRow()][track.getCol()] = (student.Space) track;
         }
         routes.add(route);
     }

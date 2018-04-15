@@ -4,19 +4,17 @@ import model.Baron;
 import model.Orientation;
 import model.Space;
 
-public class Track implements model.Track {
+public class Track extends student.Space implements model.Track{
     private Orientation orientation;
     private Baron owner;
     private Route route;
-    private int row;
-    private int col;
+
 
     public Track(Orientation orientation, Baron owner, Route route, int row, int col) {
+        super(row,col);
         this.orientation = orientation;
         this.owner = owner;
         this.route = route;
-        this.row = row;
-        this.col = col;
     }
 
     /**
@@ -68,7 +66,7 @@ public class Track implements model.Track {
      */
     @Override
     public int getRow() {
-        return this.row;
+        return super.getRow();
     }
 
     /**
@@ -78,7 +76,7 @@ public class Track implements model.Track {
      */
     @Override
     public int getCol() {
-        return this.col;
+        return super.getCol();
     }
 
     /**
@@ -92,6 +90,6 @@ public class Track implements model.Track {
      */
     @Override
     public boolean collocated(Space other) {
-        return other.getCol() == this.col && other.getRow() == this.row;
+        return other.getCol() == super.getCol() && other.getRow() == super.getRow();
     }
 }

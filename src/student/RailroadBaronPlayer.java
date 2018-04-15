@@ -10,7 +10,7 @@ import java.util.*;
 public class RailroadBaronPlayer implements Player {
     private Baron baron;
     private model.Pair lastTwoCards = new student.Pair(model.Card.NONE, model.Card.NONE);
-    private model.Card[] hand = new model.Card[4];
+    private model.Card[] hand = new model.Card[50];
     private  int score = 0;
     private int trainPieces = 50;
     private boolean alreadyClaimed = false;
@@ -102,7 +102,8 @@ public class RailroadBaronPlayer implements Player {
     @Override
     public void startTurn(Pair dealt) {
         this.lastTwoCards = dealt;
-
+        int i = 0;
+        //+ dealt;
     }
 
     /**

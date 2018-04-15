@@ -2,15 +2,12 @@ package student;
 
 import model.Space;
 
-public class Station implements model.Station {
+public class Station extends student.Space implements model.Station{ //extends student.Space{
     private String name;
-    private int row;
-    private int col;
 
     public Station(String name, int row, int col) {
+        super(row,col);
         this.name = name;
-        this.row = row;
-        this.col = col;
     }
 
     @Override
@@ -20,16 +17,16 @@ public class Station implements model.Station {
 
     @Override
     public int getRow() {
-        return this.row;
+        return super.getRow();
     }
 
     @Override
     public int getCol() {
-        return this.col;
+        return super.getCol();
     }
 
     @Override
     public boolean collocated(Space other) {
-        return other.getRow() == this.row && other.getCol() == this.col;
+        return other.getRow() == this.getRow() && other.getCol() == this.getCol();
     }
 }

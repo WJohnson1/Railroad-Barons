@@ -100,6 +100,12 @@ public class Game implements model.RailroadBarons{
          p2.reset(hand2);
          p3.reset(hand3);
          p4.reset(hand4);
+         players.add(p1);
+         players.add(p2);
+         players.add(p3);
+         players.add(p4);
+         Pair p = new Pair(deck.drawACard(),deck.drawACard());
+         p1.startTurn(p);
      }
 
     /**
