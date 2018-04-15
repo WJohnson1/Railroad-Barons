@@ -14,7 +14,7 @@ import java.util.Collection;
 
 public class Game implements model.RailroadBarons{
      //private MapMaker railroadMap;
-     private ArrayList<RailroadBaronsObserver> observers = new ArrayList<>();
+     private Collection<RailroadBaronsObserver> observers = new ArrayList<>();
     private Collection<Player> players = new ArrayList<>();
      private student.Deck deck = new student.Deck();
      private model.RailroadMap railroadMap;
@@ -45,6 +45,11 @@ public class Game implements model.RailroadBarons{
      public void addRailroadBaronsObserver(RailroadBaronsObserver observer) {
 
          observers.add(observer);
+         observer.turnStarted(this,getCurrentPlayer());
+         observer.turnEnded(this,getCurrentPlayer());
+         if (this.gameIsOver()){
+             observer.gameOver(this,getCurrentPlayer());
+         }
      }
 
     /**
@@ -103,6 +108,7 @@ public class Game implements model.RailroadBarons{
          //Pair p = new Pair(deck.drawACard(),deck.drawACard());
          //getCurrentPlayer().startTurn(p);
          //this.endTurn();
+         observers.notify();
 
      }
 
@@ -262,6 +268,7 @@ public class Game implements model.RailroadBarons{
      public boolean gameIsOver() {
          boolean a = true;
          for (Player player: players){
+             System.out.println(getRailroadMap());
              if (player.canContinuePlaying(getRailroadMap().getLengthOfShortestUnclaimedRoute())){
                  a = false;
              }
