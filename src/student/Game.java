@@ -7,8 +7,6 @@ import model.Deck;
 import model.RailroadMap;
 import model.Route;
 import model.Track;
-import view.Console;
-import view.TextAreaConsole;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,7 +19,7 @@ public class Game implements model.RailroadBarons{
      private model.RailroadMap railroadMap;
      public Game() {
          for (int i = 0; i < 4; i++) {
-             Player p = new RailroadBaronPlayer(i);
+             RailroadBaronPlayer p = new RailroadBaronPlayer(i);
              players.add(p);
          }
      }
@@ -121,10 +119,10 @@ public class Game implements model.RailroadBarons{
      public void startAGameWith(model.RailroadMap map, Deck deck) {
         railroadMap = map;
         this.deck = (student.Deck) deck;
-         Player p1 = new RailroadBaronPlayer(0);
-         Player p2 = new RailroadBaronPlayer(1);
-         Player p3 = new RailroadBaronPlayer(2);
-         Player p4 = new RailroadBaronPlayer(3);
+         //Player p1 = new RailroadBaronPlayer(0);
+         //Player p2 = new RailroadBaronPlayer(1);
+         //Player p3 = new RailroadBaronPlayer(2);
+         //Player p4 = new RailroadBaronPlayer(3);
          model.Card[] hand1 = new model.Card[50];
          model.Card[] hand2 = new model.Card[50];
          model.Card[] hand3 = new model.Card[50];
@@ -139,16 +137,12 @@ public class Game implements model.RailroadBarons{
              hand3[i] = c2;
              hand4[i] = c3;
          }
-         p1.reset(hand1);
-         p2.reset(hand2);
-         p3.reset(hand3);
-         p4.reset(hand4);
-         players.add(p1);
-         players.add(p2);
-         players.add(p3);
-         players.add(p4);
+         ((Player)(players.toArray()[0])).reset(hand1);
+         ((Player)(players.toArray()[1])).reset(hand2);
+         ((Player)(players.toArray()[2])).reset(hand3);
+         ((Player)(players.toArray()[3])).reset(hand4);
          Pair p = new Pair(deck.drawACard(),deck.drawACard());
-         p1.startTurn(p);
+         getCurrentPlayer().startTurn(p);
      }
 
     /**
@@ -212,7 +206,7 @@ public class Game implements model.RailroadBarons{
      */
      @Override
      public void endTurn() {
-        players.add(getCurrentPlayer());
+        players.add((RailroadBaronPlayer) getCurrentPlayer());
          ((RailroadBaronPlayer) getCurrentPlayer()).changeAlreadyClaimed();
          players.remove(getCurrentPlayer());
      }
@@ -233,10 +227,11 @@ public class Game implements model.RailroadBarons{
      *
      * @return The {@link Player Players} currently playing the game.
      */
-     @Override
-     public Collection<Player> getPlayers() {
-        return  this.players;
-     }
+    @Override
+    public Collection<Player> getPlayers() {
+        return this.players;
+    }
+
 
     /**
      * Indicates whether or not the game is over. This occurs when no more
@@ -268,7 +263,6 @@ public class Game implements model.RailroadBarons{
 
 
      public static void main(String[] args) {
-         System.out.println("help");
          Application.launch(view.RailroadBaronsUI.class,args);
      }
 }
