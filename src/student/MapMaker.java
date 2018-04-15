@@ -11,8 +11,6 @@ import java.util.HashMap;
 public class MapMaker implements model.MapMaker {
     private HashMap<Integer, Station> stations = new HashMap<>();
     private ArrayList<Route> routes = new ArrayList<>();
-    private int rows = 0;
-    private int columns = 0;
 
     /**
      * Loads a {@linkplain RailroadMap map} using the data in the given
@@ -37,12 +35,6 @@ public class MapMaker implements model.MapMaker {
                     int id = Integer.parseInt(cut[0]);
                     int row = Integer.parseInt(cut[1]);
                     int col = Integer.parseInt(cut[2]);
-                    if (row > rows){
-                        rows = row;
-                    }
-                    if (col > columns){
-                        columns = col;
-                    }
                     String name = "";
                     for (int i = 3; i < cut.length; i++) {
                         name = name + cut[i];
@@ -76,7 +68,11 @@ public class MapMaker implements model.MapMaker {
                 }
                 line = file.readLine();
             }
-            return new student.RailroadMap(rows, columns);
+            model.RailroadMap map = new student.RailroadMap(20, 25);
+            for (model.Route route : this.routes){
+                map.routeClaimed(route);
+            }
+            return map;
         }
         catch(IOException e){
             e.printStackTrace();

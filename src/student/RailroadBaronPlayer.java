@@ -14,7 +14,7 @@ public class RailroadBaronPlayer implements Player {
     private  int score = 0;
     private int trainPieces = 45;
     private boolean alreadyClaimed = false;
-    private Set<PlayerObserver> observers = new HashSet<>();
+    private Set<model.PlayerObserver> observers = new HashSet<>();
     private  Collection<model.Route> claimedRoutes = Collections.emptyList();
     public  RailroadBaronPlayer(int i){
         switch (i){
@@ -65,7 +65,7 @@ public class RailroadBaronPlayer implements Player {
      * @param observer The new {@link PlayerObserver}.
      */
     @Override
-    public void addPlayerObserver(PlayerObserver observer) {
+    public void addPlayerObserver(model.PlayerObserver observer) {
         observers.add(observer);
 
     }
@@ -77,7 +77,7 @@ public class RailroadBaronPlayer implements Player {
      * @param observer The {@link PlayerObserver} to remove.
      */
     @Override
-    public void removePlayerObserver(PlayerObserver observer) {
+    public void removePlayerObserver(model.PlayerObserver observer) {
         observers.remove(observer);
     }
 

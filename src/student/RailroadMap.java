@@ -119,6 +119,10 @@ public class RailroadMap implements model.RailroadMap {
      */
     @Override
     public void routeClaimed(model.Route route) {
+        model.Station origin = route.getOrigin();
+        model.Station destination = route.getDestination();
+        Sections[origin.getRow()][origin.getCol()] = origin;
+        Sections[destination.getRow()][destination.getCol()] = destination;
         for (model.Space track : route.getTracks() ){
             Sections[track.getRow()][track.getCol()] = track;
         }

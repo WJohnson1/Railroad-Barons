@@ -1,6 +1,6 @@
 package student;
 
-public class Space implements model.Space {
+public class Space implements model.Space{
     private int row;
     private int column;
 

@@ -79,12 +79,12 @@ public class Route implements model.Route {
     public List<model.Track> getTracks() {
         ArrayList<model.Track> tracks = new ArrayList<>();
         if (getOrientation() == Orientation.HORIZONTAL){
-            for (int i = 0; i < getLength(); i++){
+            for (int i = 1; i < getLength(); i++){
                 tracks.add(new Track(getOrientation(), this.owner, this, getOrigin().getRow(), getOrigin().getCol() + i));
             }
         }
         else{
-            for (int i = 0; i < getLength(); i++){
+            for (int i = 1; i < getLength(); i++){
                 tracks.add(new Track(getOrientation(), this.owner, this, getOrigin().getRow() + i, getOrigin().getCol()));
             }
         }
@@ -100,10 +100,10 @@ public class Route implements model.Route {
     @Override
     public int getLength() {
         if (getOrientation() == Orientation.HORIZONTAL){
-            return Math.abs(getOrigin().getCol() - getDestination().getCol());
+            return Math.abs(getOrigin().getCol() - getDestination().getCol()-1);
         }
         else{
-            return Math.abs(getOrigin().getRow() - getDestination().getRow());
+            return Math.abs(getOrigin().getRow() - getDestination().getRow()-1);
         }
     }
 
