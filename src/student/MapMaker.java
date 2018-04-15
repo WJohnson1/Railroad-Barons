@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MapMaker implements model.MapMaker {
-    private HashMap<Integer, Station> stations = new HashMap<>();
+    private HashMap<Integer, model.Station> stations = new HashMap<>();
     private ArrayList<Route> routes = new ArrayList<>();
 
     /**

@@ -9,9 +9,9 @@ public class Route implements model.Route {
     private int firstID;
     private int secondD;
     private Baron owner;
-    private HashMap<Integer, Station> stations;
+    private HashMap<Integer, model.Station> stations;
 
-    public Route(int firstID, int secondD, Baron owner, HashMap<Integer, Station> stations) {
+    public Route(int firstID, int secondD, Baron owner, HashMap<Integer, model.Station> stations) {
         this.firstID = firstID;
         this.secondD = secondD;
         this.owner = owner;
