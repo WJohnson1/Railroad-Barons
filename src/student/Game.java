@@ -98,10 +98,11 @@ public class Game implements model.RailroadBarons{
          ((Player)(players.toArray()[1])).reset(hand2);
          ((Player)(players.toArray()[2])).reset(hand3);
          ((Player)(players.toArray()[3])).reset(hand4);
+         Pair p = new Pair(deck.drawACard(),deck.drawACard());
+         getCurrentPlayer().startTurn(p);
          for (RailroadBaronsObserver ob : this.observers){
              ob.turnStarted(this, getCurrentPlayer());
          }
-         //Pair p = new Pair(deck.drawACard(),deck.drawACard());
          //getCurrentPlayer().startTurn(p);
          //this.endTurn();
 
@@ -209,6 +210,7 @@ public class Game implements model.RailroadBarons{
      */
      @Override
      public void claimRoute(int row, int col) throws RailroadBaronsException {
+         System.out.println("Row: " + row + " Column: " + col);
         getCurrentPlayer().claimRoute(getRailroadMap().getRoute(row,col));
 
      }
@@ -226,7 +228,8 @@ public class Game implements model.RailroadBarons{
          players.remove(getCurrentPlayer());
          ((RailroadBaronPlayer) p).changeAlreadyClaimed();
          players.add(p);
-         //Pair pair = new Pair(this.deck.drawACard(),this.deck.drawACard());
+         Pair pair = new Pair(this.deck.drawACard(),this.deck.drawACard());
+         getCurrentPlayer().startTurn(pair);
          for (RailroadBaronsObserver ob : this.observers){
              ob.turnStarted(this, getCurrentPlayer());
          }

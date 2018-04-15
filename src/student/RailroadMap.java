@@ -102,14 +102,8 @@ public class RailroadMap implements model.RailroadMap {
      */
     @Override
     public model.Route getRoute(int row, int col) {
-        for (model.Route route : this.routes){
-            for (model.Track track : route.getTracks()){
-                if (track.getRow() == row && track.getCol() == col){
-                    return route;
-                }
-            }
-        }
-        return null;
+        System.out.println(routes.size());
+        return ((model.Track)Sections[row][col]).getRoute();
     }
 
     /**
