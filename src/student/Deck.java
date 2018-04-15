@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Deck implements model.Deck{
-    private  static  int numCards = 120;
-    private  static  int currentCardNum = 120;
+    private  static  int numCards = 200;
+    private  static  int currentCardNum = 200;
     private List<Card> cards = new ArrayList<>();
     public Deck(){
         for (int i = 0; i<numCards;i++){
-            student.Card s = new  student.Card();
+            student.Card s = new  student.Card(i%10);
             Card c = s.getValue();
             cards.add(c);
         }
