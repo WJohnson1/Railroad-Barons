@@ -289,10 +289,6 @@ public class Game implements model.RailroadBarons{
                  a = false;
              }
          }
-         if (a){
-             System.out.println("Game Over");
-
-         }
          return a;
      }
 

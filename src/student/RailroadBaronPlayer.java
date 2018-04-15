@@ -337,4 +337,9 @@ public class RailroadBaronPlayer implements Player {
     public void changeAlreadyClaimed() {
          alreadyClaimed = !alreadyClaimed;
     }
+
+    @Override
+    public String toString(){
+        return baron + " Baron";
+    }
 }

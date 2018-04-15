@@ -95,6 +95,6 @@ public class MapMaker implements model.MapMaker {
      */
     @Override
     public void writeMap(RailroadMap map, OutputStream out) throws RailroadBaronsException {
-
+       // map.getRoutes()
     }
 }
