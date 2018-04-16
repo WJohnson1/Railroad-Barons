@@ -1,13 +1,15 @@
 package student;
 
-import model.RailroadMap;
 import model.RailroadMapObserver;
 
 import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * The Class for the Spaces on the Railroad Map
  *
+ * @author Gabriel Jusino, William Johnson
+ * @emails gej9887, wcj7833
  */
 public class Space implements model.Space {
     private int row;
