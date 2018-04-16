@@ -1,10 +1,5 @@
 package student;
 
-import model.RailroadMapObserver;
-
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * The Class for the Spaces on the Railroad Map
  *
@@ -14,12 +9,11 @@ import java.util.Set;
 public class Space implements model.Space {
     private int row;
     private int column;
-    private Set<RailroadMapObserver> observers = new HashSet<>();
 
     /**
-     *
-     * @param row
-     * @param column
+     * Constructor for Space
+     * @param row the row of the Space
+     * @param column the column of the space
      */
     public Space(int row, int column) {
         this.row = row;

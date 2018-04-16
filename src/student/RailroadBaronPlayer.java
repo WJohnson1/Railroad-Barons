@@ -245,9 +245,7 @@ public class RailroadBaronPlayer implements Player {
         for (Card c: hand) {
             if (this.countCardsInHand(c) >= route.getLength() & !c.equals(Card.WILD)) {
                 for (int i = 0; i < hand.size(); i++) {
-                    if (hand.get(i) == null) {
-                        break;
-                    } else if (hand.get(i).equals(c) && a < route.getLength()) {
+                    if (hand.get(i).equals(c) && a < route.getLength()) {
                         hand.set(i, Card.NONE);
                         a++;
                     }
@@ -257,11 +255,9 @@ public class RailroadBaronPlayer implements Player {
         }
         if (!completed) {
             for (Card c : hand) {
-                if ((this.countCardsInHand(c) + this.countCardsInHand(Card.WILD)) >= route.getLength()) {
+                if (c!=Card.WILD&&(this.countCardsInHand(c) + this.countCardsInHand(Card.WILD)) >= route.getLength()) {
                     for (int i = 0; i < hand.size(); i++) {
-                        if (hand.get(i) == null) {
-                            break;
-                        } else if (hand.get(i).equals(c) && a < route.getLength()) {
+                        if (hand.get(i).equals(c) && a < route.getLength()) {
                             hand.set(i, Card.NONE);
                             a++;
                         } else if (hand.get(i).equals(Card.WILD) && w < 1) {
