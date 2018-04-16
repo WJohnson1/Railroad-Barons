@@ -222,10 +222,10 @@ public class Game implements model.RailroadBarons{
          for (RailroadBaronsObserver ob : this.observers){
              ob.turnEnded(this, getCurrentPlayer());
          }
-        Player p = getCurrentPlayer();
+         Player p = getCurrentPlayer();
          ((RailroadBaronPlayer) getCurrentPlayer()).changeAlreadyClaimed();
+
          players.remove(getCurrentPlayer());
-         //((RailroadBaronPlayer) p).changeAlreadyClaimed();
          players.add(p);
          if (!this.gameIsOver()) {
              Pair pair = new Pair(this.deck.drawACard(), this.deck.drawACard());
@@ -237,7 +237,6 @@ public class Game implements model.RailroadBarons{
          else{
              for (RailroadBaronsObserver ob : this.observers){
                  ob.gameOver(this, getCurrentPlayer());
-                this.removeRailroadBaronsObserver(ob);
              }
          }
      }
@@ -278,18 +277,28 @@ public class Game implements model.RailroadBarons{
      @Override
      public boolean gameIsOver() {
          boolean a = true;
-         for (Player player: players){
-             if (player.canContinuePlaying(getRailroadMap().getLengthOfShortestUnclaimedRoute())){
-                 a = false;
-             }
-
-         }
+         boolean b = true;
          for (model.Route route: getRailroadMap().getRoutes()){
              if (route.getBaron()==Baron.UNCLAIMED){
                  a = false;
              }
          }
-         return a;
+         for (Player player: players){
+             if (player.canContinuePlaying(getRailroadMap().getLengthOfShortestUnclaimedRoute())){
+                 if (deck.numberOfCardsRemaining()>0) {
+                     b = false;
+                 }
+             }
+         }
+         if (a){
+             return true;
+         }
+         else {
+             if (!b){
+                 return b;
+             }
+             return !b;
+         }
      }
 
 
