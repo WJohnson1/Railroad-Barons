@@ -3,11 +3,16 @@ package student;
 import model.Baron;
 import model.RailroadBaronsException;
 import model.RailroadMap;
-
 import java.io.*;
 import java.util.*;
 
+/**
+ * This class is in charge of creating a map layout for the scene of the Railroad Baron Game.
+ * @authors Gabriel Jusino, William Johnson
+ * @emails gej9887, wcj7833
+ */
 public class MapMaker implements model.MapMaker {
+
     private HashMap<Integer, model.Station> stations = new HashMap<>();
     private ArrayList<Route> routes = new ArrayList<>();
 
@@ -95,7 +100,6 @@ public class MapMaker implements model.MapMaker {
     @Override
     public void writeMap(RailroadMap map, OutputStream out) throws RailroadBaronsException {
        ArrayList<model.Route> routes = (ArrayList<model.Route>)map.getRoutes();
-       String[] StationsToString = new String[routes.size()];
         HashMap<Integer, model.Station> Stations = ((student.RailroadMap)map).getStations();
        PrintWriter print = new PrintWriter(out);
        for (int i = 0; i < Stations.size(); i++){
@@ -105,7 +109,10 @@ public class MapMaker implements model.MapMaker {
        print.println("##ROUTES##");
        for (model.Route route : routes){
            student.Station origin = (student.Station)route.getOrigin();
-           print.println();
+           student.Station destination = (student.Station)route.getDestination();
+           print.println(origin.ID() + " " + destination.ID() + " " + route.getBaron());
        }
+       print.close();
+       print.flush();
     }
 }

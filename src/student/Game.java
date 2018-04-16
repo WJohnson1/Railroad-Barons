@@ -7,24 +7,25 @@ import model.Deck;
 import model.RailroadMap;
 import model.Route;
 import model.Track;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
 /**
- *
- *
- *
+ * This class is what runs the RailroadBarons Game.
+ * @authors Gabriel Jusino, William Johnson
+ * @emails gej9887, wcj7833
  */
 public class Game implements model.RailroadBarons{
-     //private MapMaker railroadMap;
      private Collection<RailroadBaronsObserver> observers = new ArrayList<>();
-    private Collection<Player> players = new ArrayList<>();
+     private Collection<Player> players = new ArrayList<>();
      private student.Deck deck = new student.Deck();
      private model.RailroadMap railroadMap;
 
-     public Game() {
+    /**
+     * Constructor for Game. This creates four players to play the game.
+     */
+    public Game() {
          for (int i = 0; i < 4; i++) {
              RailroadBaronPlayer p = new RailroadBaronPlayer(i);
              players.add(p);
@@ -155,6 +156,9 @@ public class Game implements model.RailroadBarons{
          ((Player)(players.toArray()[3])).reset(hand4);
          Pair p = new Pair(deck.drawACard(),deck.drawACard());
          getCurrentPlayer().startTurn(p);
+         for (RailroadBaronsObserver ob : this.observers){
+             ob.turnStarted(this, getCurrentPlayer());
+         }
      }
 
     /**

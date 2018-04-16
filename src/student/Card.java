@@ -1,7 +1,10 @@
 package student;
 
-import java.util.concurrent.ThreadLocalRandom;
-
+/**
+ * This class is for an individual Card in a deck.
+ * @authors Gabriel Jusino, William Johnson
+ * @emails gej9887, wcj7833
+ */
 public class Card {
     private model.Card value;
 

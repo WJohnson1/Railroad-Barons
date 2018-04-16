@@ -4,9 +4,13 @@ import model.*;
 import model.Card;
 import model.Pair;
 import model.Route;
-
 import java.util.*;
 
+/**
+ * This class is for each individual player in the Railroads Baron game.
+ * @authors Gabriel Jusino, William Johnson
+ * @emails gej9887, wcj7833
+ */
 public class RailroadBaronPlayer implements Player {
     private Baron baron;
     private model.Pair lastTwoCards = new student.Pair(model.Card.NONE, model.Card.NONE);
@@ -16,6 +20,11 @@ public class RailroadBaronPlayer implements Player {
     private boolean alreadyClaimed = false;
     private Set<model.PlayerObserver> observers = new HashSet<>();
     private  Collection<model.Route> claimedRoutes = new ArrayList<>();
+
+    /**
+     * Construstor for RailroadBaronPlayer. This determines what type of baron this is.
+     * @param i type of case
+     */
     public  RailroadBaronPlayer(int i){
         switch (i){
             case 0:

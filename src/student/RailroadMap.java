@@ -18,7 +18,8 @@ public class RailroadMap implements model.RailroadMap {
     private student.Space[][] Sections;
     private ArrayList<RailroadMapObserver> observers = new ArrayList<>();
     private ArrayList<model.Route> routes = new ArrayList<>();
-    private HashMap<Integer, model.Station> stations = new HashMap<>();
+    private HashMap<Integer, model.Station> stations;
+
     /**
      * Constructor for the Railroad map
      * @param rows the rows in the Railroad map

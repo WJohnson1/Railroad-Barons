@@ -2,6 +2,12 @@ package student;
 
 import model.Card;
 
+
+/**
+ * This class is where the players receive two cards from the deck in the start of their turn.
+ * @authors Gabriel Jusino, William Johnson
+ * @emails gej9887, wcj7833
+ */
 public class Pair implements model.Pair{
     private  Card firstCard;
     private  Card secondCard;

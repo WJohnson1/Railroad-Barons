@@ -1,19 +1,23 @@
 package student;
 
 import model.Card;
-
 import java.util.ArrayList;
-
 import java.util.Collections;
 import java.util.List;
 
+
+/**
+ * This class represents the Deck object where players gets extra cards from in every start of a turn.
+ * @authors Gabriel Jusino, William Johnson
+ * @emails gej9887, wcj7833
+ */
 public class Deck implements model.Deck{
     private  static  int numCards = 200;
     private  static  int currentCardNum = 200;
     private List<Card> cards = new ArrayList<>();
 
     /**
-     *
+     * Constructor for Deck, which creates a new deck of cards
      */
     public Deck(){
         for (int i = 0; i<numCards;i++){
