@@ -12,6 +12,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+/**
+ *
+ *
+ *
+ */
 public class Game implements model.RailroadBarons{
      //private MapMaker railroadMap;
      private Collection<RailroadBaronsObserver> observers = new ArrayList<>();
@@ -56,7 +61,6 @@ public class Game implements model.RailroadBarons{
      @Override
      public void removeRailroadBaronsObserver(RailroadBaronsObserver observer) {
         observers.remove(observer);
-        //players.removeAll(players);
      }
 
     /**
@@ -80,10 +84,10 @@ public class Game implements model.RailroadBarons{
      public void startAGameWith(model.RailroadMap map) {
          railroadMap = map;
          deck.reset();
-         model.Card[] hand1 = new model.Card[4];
-         model.Card[] hand2 = new model.Card[4];
-         model.Card[] hand3 = new model.Card[4];
-         model.Card[] hand4 = new model.Card[4];
+         model.Card[] hand1 = new model.Card[5];
+         model.Card[] hand2 = new model.Card[5];
+         model.Card[] hand3 = new model.Card[5];
+         model.Card[] hand4 = new model.Card[5];
          for ( int i = 0;i<4;i++){
              model.Card c = deck.drawACard();
              model.Card c1 = deck.drawACard();
@@ -103,10 +107,6 @@ public class Game implements model.RailroadBarons{
          for (RailroadBaronsObserver ob : this.observers){
              ob.turnStarted(this, getCurrentPlayer());
          }
-         //getCurrentPlayer().startTurn(p);
-         //this.endTurn();
-
-
      }
 
     /**
@@ -301,7 +301,12 @@ public class Game implements model.RailroadBarons{
          }
      }
 
-
+    /**
+     * Application entry point for the Game.
+     * It starts the JavaFX application.
+     *
+     * @param args Command line arguments.
+     */
      public static void main(String[] args) {
          Application.launch(view.RailroadBaronsUI.class,args);
      }

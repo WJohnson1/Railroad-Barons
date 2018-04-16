@@ -333,10 +333,17 @@ public class RailroadBaronPlayer implements Player {
         return false;
     }
 
+    /**
+     * Changes the value of whether the player has already played
+     */
     public void changeAlreadyClaimed() {
          alreadyClaimed = !alreadyClaimed;
     }
 
+    /**
+     * Returns string representation of the baron
+     * @return the string representation of the baron
+     */
     @Override
     public String toString(){
         return baron + " Baron";

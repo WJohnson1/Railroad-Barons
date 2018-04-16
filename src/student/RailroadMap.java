@@ -6,8 +6,12 @@ import model.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashMap;
 import java.util.List;
 
+/**
+ *
+ */
 public class RailroadMap implements model.RailroadMap {
     private int rows;
     private int columns;
@@ -15,8 +19,12 @@ public class RailroadMap implements model.RailroadMap {
     private ArrayList<RailroadMapObserver> observers = new ArrayList<>();
     private ArrayList<model.Route> routes = new ArrayList<>();
     private HashMap<Integer, model.Station> stations = new HashMap<>();
-
-
+    /**
+     * Constructor for the Railroad map
+     * @param rows the rows in the Railroad map
+     * @param columns the columns in the railroad map
+     * @param stations the stations in the railroad map
+     */
     public RailroadMap(int rows, int columns, HashMap<Integer, model.Station> stations) {
         this.stations = stations;
         this.rows = rows;
@@ -29,6 +37,10 @@ public class RailroadMap implements model.RailroadMap {
         }
     }
 
+    /**
+     * Returns a hash map of the stations in the railroad map with the id as the key
+     * @return the hash map of stations
+     */
     public HashMap<Integer, model.Station> getStations(){
         return this.stations;
     }

@@ -9,7 +9,14 @@ public class Track extends student.Space implements model.Track{
     private Baron owner;
     private Route route;
 
-
+    /**
+     * Constructor for the Track
+     * @param orientation orientation of the track
+     * @param owner owner of the track
+     * @param route route that the track belongs to
+     * @param row the row of the track
+     * @param col the column of the track
+     */
     public Track(Orientation orientation, Baron owner, Route route, int row, int col) {
         super(row,col);
         this.orientation = orientation;

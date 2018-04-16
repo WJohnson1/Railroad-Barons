@@ -5,6 +5,12 @@ import model.Card;
 public class Pair implements model.Pair{
     private  Card firstCard;
     private  Card secondCard;
+
+    /**
+     * The constructor for a pair of cards
+     * @param first the first card
+     * @param second the second card
+     */
     public  Pair (Card first, Card second){
         firstCard = first;
         secondCard = second;

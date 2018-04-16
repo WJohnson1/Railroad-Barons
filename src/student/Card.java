@@ -4,6 +4,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Card {
     private model.Card value;
+
+    /**
+     * Constructor of the Card
+     * @param randomNum value that determines value of the card
+     */
     public Card(int randomNum){
         switch (randomNum) {
             case 0:
@@ -36,6 +41,10 @@ public class Card {
         }
     }
 
+    /**
+     * Gets the value of the card
+     * @return the value of the card
+     */
     public model.Card getValue() {
         return value;
     }

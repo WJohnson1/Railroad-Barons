@@ -11,6 +11,13 @@ public class Route implements model.Route {
     private Baron owner;
     private HashMap<Integer, model.Station> stations;
 
+    /**
+     * The constructor for a route
+     * @param firstID the id value of the first station
+     * @param secondD the id value of the second station
+     * @param owner the owner of the route
+     * @param stations the stations that are at each end of the route
+     */
     public Route(int firstID, int secondD, Baron owner, HashMap<Integer, model.Station> stations) {
         this.firstID = firstID;
         this.secondD = secondD;
