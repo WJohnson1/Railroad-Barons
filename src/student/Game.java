@@ -239,8 +239,14 @@ public class Game implements model.RailroadBarons{
              }
          }
          else{
-             for (RailroadBaronsObserver ob : this.observers){
-                 ob.gameOver(this, getCurrentPlayer());
+             for (RailroadBaronsObserver ob : this.observers) {
+                 Player p1 = getCurrentPlayer();
+                 for (Player p2 : players) {
+                     if (p2.getScore()>p1.getScore()){
+                         p1 = p2;
+                     }
+                 }
+                 ob.gameOver(this, p1);
              }
          }
      }
