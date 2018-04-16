@@ -2,6 +2,13 @@ package student;
 
 import model.Space;
 
+/**
+ * The Class for the Station that represents the individual spaces
+ * on the map that are stations
+ *
+ * @author Gabriel Jusino, William Johnson
+ * @emails gej9887, wcj7833
+ */
 public class Station extends student.Space implements model.Station{ //extends student.Space{
     private String name;
     private int id;

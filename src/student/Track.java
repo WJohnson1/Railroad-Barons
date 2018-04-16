@@ -4,6 +4,13 @@ import model.Baron;
 import model.Orientation;
 import model.Space;
 
+/**
+ * The Class for track that represents the individual spaces
+ * between two stations to form a route
+ *
+ * @author Gabriel Jusino, William Johnson
+ * @emails gej9887, wcj7833
+ */
 public class Track extends student.Space implements model.Track{
     private Orientation orientation;
     private Baron owner;

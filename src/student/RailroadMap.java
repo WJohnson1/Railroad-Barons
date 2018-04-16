@@ -6,11 +6,13 @@ import model.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashMap;
-import java.util.List;
 
 /**
+ * The Class for the Railroad map which is the map representation for the game.
+ * The railroad map consists of spaces, routes, and tracks.
  *
+ * @author Gabriel Jusino, William Johnson
+ * @emails gej9887, wcj7833
  */
 public class RailroadMap implements model.RailroadMap {
     private int rows;

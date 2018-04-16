@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * The Class for the Route that represents the path
+ * between two stations
+ *
+ * @author Gabriel Jusino, William Johnson
+ * @emails gej9887, wcj7833
+ */
 public class Route implements model.Route {
     private int firstID;
     private int secondD;
