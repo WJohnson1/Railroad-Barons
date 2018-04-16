@@ -5,6 +5,7 @@ import model.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 public class RailroadMap implements model.RailroadMap {
@@ -13,9 +14,11 @@ public class RailroadMap implements model.RailroadMap {
     private student.Space[][] Sections;
     private ArrayList<RailroadMapObserver> observers = new ArrayList<>();
     private ArrayList<model.Route> routes = new ArrayList<>();
+    private HashMap<Integer, model.Station> stations = new HashMap<>();
 
 
-    public RailroadMap(int rows, int columns) {
+    public RailroadMap(int rows, int columns, HashMap<Integer, model.Station> stations) {
+        this.stations = stations;
         this.rows = rows;
         this.columns = columns;
         this.Sections = new Space[rows][columns];
@@ -24,6 +27,10 @@ public class RailroadMap implements model.RailroadMap {
                 Sections[row][column] = new student.Space(row, column);
             }
         }
+    }
+
+    public HashMap<Integer, model.Station> getStations(){
+        return this.stations;
     }
 
     /**

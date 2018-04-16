@@ -5,8 +5,7 @@ import model.RailroadBaronsException;
 import model.RailroadMap;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 public class MapMaker implements model.MapMaker {
     private HashMap<Integer, model.Station> stations = new HashMap<>();
@@ -42,7 +41,7 @@ public class MapMaker implements model.MapMaker {
                             name = name + " ";
                         }
                     }
-                    stations.put(id, new Station(name, row, col));
+                    stations.put(id, new Station(name, row, col, id));
                 }
                 else if (line.equals("##ROUTES##")){
                     isRoutes = true;
@@ -68,7 +67,7 @@ public class MapMaker implements model.MapMaker {
                 }
                 line = file.readLine();
             }
-            model.RailroadMap map = new student.RailroadMap(20, 25);
+            model.RailroadMap map = new student.RailroadMap(20, 25, this.stations);
             for (model.Route route : this.routes){
                 map.routeClaimed(route);
             }
@@ -95,6 +94,18 @@ public class MapMaker implements model.MapMaker {
      */
     @Override
     public void writeMap(RailroadMap map, OutputStream out) throws RailroadBaronsException {
-       // map.getRoutes()
+       ArrayList<model.Route> routes = (ArrayList<model.Route>)map.getRoutes();
+       String[] StationsToString = new String[routes.size()];
+        HashMap<Integer, model.Station> Stations = ((student.RailroadMap)map).getStations();
+       PrintWriter print = new PrintWriter(out);
+       for (int i = 0; i < Stations.size(); i++){
+           student.Station station = (student.Station)Stations.get(i);
+           print.println(i + " " + station.getRow() + " " + station.getCol() + " " + station.getName());
+       }
+       print.println("##ROUTES##");
+       for (model.Route route : routes){
+           student.Station origin = (student.Station)route.getOrigin();
+           print.println();
+       }
     }
 }

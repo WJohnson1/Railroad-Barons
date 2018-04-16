@@ -4,10 +4,15 @@ import model.Space;
 
 public class Station extends student.Space implements model.Station{ //extends student.Space{
     private String name;
+    private int id;
 
-    public Station(String name, int row, int col) {
+    public Station(String name, int row, int col, int id) {
         super(row,col);
         this.name = name;
+    }
+
+    public int ID(){
+        return this.id;
     }
 
     @Override
