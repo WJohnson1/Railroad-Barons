@@ -69,6 +69,14 @@ public class MapMaker implements model.MapMaker {
                         owner = Baron.BLUE;
                     }
                     routes.add(new Route(Integer.parseInt(cut[0]), Integer.parseInt(cut[1]), owner, this.stations));
+                    for (Integer key : this.stations.keySet()){
+                        if (Integer.parseInt(cut[0]) == key){
+                            ((student.Station)stations.get(key)).addNeighbor(stations.get(Integer.parseInt(cut[1])));
+                        }
+                        else if (Integer.parseInt(cut[1]) == key){
+                            ((student.Station)stations.get(key)).addNeighbor(stations.get(Integer.parseInt(cut[0])));
+                        }
+                    }
                 }
                 line = file.readLine();
             }

@@ -30,8 +30,8 @@ public class Game implements model.RailroadBarons{
              RailroadBaronPlayer p = new RailroadBaronPlayer(i);
              players.add(p);
          }
-         Pair p = new Pair(deck.drawACard(),deck.drawACard());
-         getCurrentPlayer().startTurn(p);
+//         Pair p = new Pair(deck.drawACard(),deck.drawACard());
+//         getCurrentPlayer().startTurn(p);
      }
 
     /**
