@@ -16,6 +16,7 @@ public class Station extends student.Space implements model.Station{ //extends s
     private String name;
     private int id;
     private ArrayList<model.Station> Outneighbors;
+    private student.StationLocation StationLoc;
 
     /**
      * Contructor for Station
@@ -33,6 +34,10 @@ public class Station extends student.Space implements model.Station{ //extends s
 
     public void addNeighbor(model.Station neighbor){
         this.Outneighbors.add(neighbor);
+    }
+
+    public void setStationLoc(StationLocation type){
+        this.StationLoc = type;
     }
 
     /**

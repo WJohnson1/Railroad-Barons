@@ -35,17 +35,25 @@ public class MapMaker implements model.MapMaker {
             Boolean isRoutes = false;
             int easternmost = 0;
             int southernmost = 0;
+            int northernmost = 100;
+            int westernmost = 100;
             while ( line != null) {
                 String[] cut = line.split(" ");
                 if (!line.equals("##ROUTES##") && !isRoutes) {
                     int id = Integer.parseInt(cut[0]);
                     int row = Integer.parseInt(cut[1]);
-                    if (row>southernmost){
+                    if (row > southernmost){
                         southernmost = row;
                     }
+                    if (row < northernmost){
+                        northernmost = row;
+                    }
                     int col = Integer.parseInt(cut[2]);
-                    if (col>easternmost){
+                    if (col > easternmost){
                         easternmost = col;
+                    }
+                    if (col < westernmost){
+                        westernmost = col;
                     }
                     String name = "";
                     for (int i = 3; i < cut.length; i++) {
@@ -78,6 +86,16 @@ public class MapMaker implements model.MapMaker {
                     }
                     routes.add(new Route(Integer.parseInt(cut[0]), Integer.parseInt(cut[1]), owner, this.stations));
                     for (Integer key : this.stations.keySet()){
+                        student.Station current = (student.Station)stations.get(key);
+                        if (current.getRow() == northernmost){
+                            current.setStationLoc(StationLocation.NORTHERNMOST);
+                        }
+                        if (current.getRow() == southernmost){
+                            current.setStationLoc(StationLocation.SOUTHERNMOST);
+                        }
+                        if (current.getCol() == northernmost){
+                            current.setStationLoc(StationLocation.NORTHEASTERNMOST);
+                        }
                         if (Integer.parseInt(cut[0]) == key){
                             ((student.Station)stations.get(key)).addNeighbor(stations.get(Integer.parseInt(cut[1])));
                         }
