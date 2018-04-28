@@ -122,11 +122,11 @@ public class ComputerGame implements model.RailroadBarons{
             ((RailroadBaronPlayer)(players.toArray()[2])).setMap(railroadMap);
         }
         ((Player)(players.toArray()[3])).reset(hand4);
-        if ((players.toArray()[4]).toString().contains("COMPUTER")){
-            ((Computer)(players.toArray()[4])).setMap(railroadMap);
+        if ((players.toArray()[3]).toString().contains("COMPUTER")){
+            ((Computer)(players.toArray()[3])).setMap(railroadMap);
         }
         else{
-            ((RailroadBaronPlayer)(players.toArray()[4])).setMap(railroadMap);
+            ((RailroadBaronPlayer)(players.toArray()[3])).setMap(railroadMap);
         }
         Pair p = new Pair(deck.drawACard(),deck.drawACard());
         getCurrentPlayer().startTurn(p);
@@ -197,11 +197,11 @@ public class ComputerGame implements model.RailroadBarons{
             ((RailroadBaronPlayer)(players.toArray()[2])).setMap(railroadMap);
         }
         ((Player)(players.toArray()[3])).reset(hand4);
-        if ((players.toArray()[4]).toString().contains("COMPUTER")){
-            ((Computer)(players.toArray()[4])).setMap(railroadMap);
+        if ((players.toArray()[3]).toString().contains("COMPUTER")){
+            ((Computer)(players.toArray()[3])).setMap(railroadMap);
         }
         else{
-            ((RailroadBaronPlayer)(players.toArray()[4])).setMap(railroadMap);
+            ((RailroadBaronPlayer)(players.toArray()[3])).setMap(railroadMap);
         }
         Pair p = new Pair(deck.drawACard(),deck.drawACard());
         getCurrentPlayer().startTurn(p);
@@ -262,7 +262,6 @@ public class ComputerGame implements model.RailroadBarons{
      */
     @Override
     public void claimRoute(int row, int col) throws RailroadBaronsException {
-        if (!this.getCurrentPlayer().toString().contains("COMPUTER")) {
             getCurrentPlayer().claimRoute(getRailroadMap().getRoute(row, col));
             getRailroadMap().routeClaimed(getRailroadMap().getRoute(row, col));
             if ((players.toArray()[0]).toString().contains("COMPUTER")){
@@ -289,7 +288,7 @@ public class ComputerGame implements model.RailroadBarons{
             else{
                 ((RailroadBaronPlayer)(players.toArray()[3])).setMap(railroadMap);
             }
-        }
+
     }
 
     /**
