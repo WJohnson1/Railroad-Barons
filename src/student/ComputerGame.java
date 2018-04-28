@@ -23,7 +23,7 @@ public class ComputerGame implements model.RailroadBarons{
     public ComputerGame() {
         for (int i = 0; i < 4; i++) {
             if (i==0) {
-                RailroadBaronPlayer p = new RailroadBaronPlayer(i,getRailroadMap());
+                RailroadBaronPlayer p = new RailroadBaronPlayer(i);
                 players.add(p);
             }
             else{
@@ -101,9 +101,33 @@ public class ComputerGame implements model.RailroadBarons{
             hand4[i] = c3;
         }
         ((Player)(players.toArray()[0])).reset(hand1);
+        if ((players.toArray()[0]).toString().contains("COMPUTER")){
+            ((Computer)(players.toArray()[0])).setMap(railroadMap);
+        }
+        else{
+            ((RailroadBaronPlayer)(players.toArray()[0])).setMap(railroadMap);
+        }
         ((Player)(players.toArray()[1])).reset(hand2);
+        if ((players.toArray()[1]).toString().contains("COMPUTER")){
+            ((Computer)(players.toArray()[1])).setMap(railroadMap);
+        }
+        else{
+            ((RailroadBaronPlayer)(players.toArray()[1])).setMap(railroadMap);
+        }
         ((Player)(players.toArray()[2])).reset(hand3);
+        if ((players.toArray()[2]).toString().contains("COMPUTER")){
+            ((Computer)(players.toArray()[2])).setMap(railroadMap);
+        }
+        else{
+            ((RailroadBaronPlayer)(players.toArray()[2])).setMap(railroadMap);
+        }
         ((Player)(players.toArray()[3])).reset(hand4);
+        if ((players.toArray()[4]).toString().contains("COMPUTER")){
+            ((Computer)(players.toArray()[4])).setMap(railroadMap);
+        }
+        else{
+            ((RailroadBaronPlayer)(players.toArray()[4])).setMap(railroadMap);
+        }
         Pair p = new Pair(deck.drawACard(),deck.drawACard());
         getCurrentPlayer().startTurn(p);
         for (RailroadBaronsObserver ob : this.observers){
@@ -152,9 +176,33 @@ public class ComputerGame implements model.RailroadBarons{
             hand4[i] = c3;
         }
         ((Player)(players.toArray()[0])).reset(hand1);
+        if ((players.toArray()[0]).toString().contains("COMPUTER")){
+            ((Computer)(players.toArray()[0])).setMap(railroadMap);
+        }
+        else{
+            ((RailroadBaronPlayer)(players.toArray()[0])).setMap(railroadMap);
+        }
         ((Player)(players.toArray()[1])).reset(hand2);
+        if ((players.toArray()[1]).toString().contains("COMPUTER")){
+            ((Computer)(players.toArray()[1])).setMap(railroadMap);
+        }
+        else{
+            ((RailroadBaronPlayer)(players.toArray()[1])).setMap(railroadMap);
+        }
         ((Player)(players.toArray()[2])).reset(hand3);
+        if ((players.toArray()[2]).toString().contains("COMPUTER")){
+            ((Computer)(players.toArray()[2])).setMap(railroadMap);
+        }
+        else{
+            ((RailroadBaronPlayer)(players.toArray()[2])).setMap(railroadMap);
+        }
         ((Player)(players.toArray()[3])).reset(hand4);
+        if ((players.toArray()[4]).toString().contains("COMPUTER")){
+            ((Computer)(players.toArray()[4])).setMap(railroadMap);
+        }
+        else{
+            ((RailroadBaronPlayer)(players.toArray()[4])).setMap(railroadMap);
+        }
         Pair p = new Pair(deck.drawACard(),deck.drawACard());
         getCurrentPlayer().startTurn(p);
         for (RailroadBaronsObserver ob : this.observers){
@@ -217,6 +265,30 @@ public class ComputerGame implements model.RailroadBarons{
         if (!this.getCurrentPlayer().toString().contains("COMPUTER")) {
             getCurrentPlayer().claimRoute(getRailroadMap().getRoute(row, col));
             getRailroadMap().routeClaimed(getRailroadMap().getRoute(row, col));
+            if ((players.toArray()[0]).toString().contains("COMPUTER")){
+                ((Computer)(players.toArray()[0])).setMap(railroadMap);
+            }
+            else{
+                ((RailroadBaronPlayer)(players.toArray()[0])).setMap(railroadMap);
+            }
+            if ((players.toArray()[1]).toString().contains("COMPUTER")){
+                ((Computer)(players.toArray()[1])).setMap(railroadMap);
+            }
+            else{
+                ((RailroadBaronPlayer)(players.toArray()[1])).setMap(railroadMap);
+            }
+            if ((players.toArray()[2]).toString().contains("COMPUTER")){
+                ((Computer)(players.toArray()[2])).setMap(railroadMap);
+            }
+            else{
+                ((RailroadBaronPlayer)(players.toArray()[2])).setMap(railroadMap);
+            }
+            if ((players.toArray()[3]).toString().contains("COMPUTER")){
+                ((Computer)(players.toArray()[3])).setMap(railroadMap);
+            }
+            else{
+                ((RailroadBaronPlayer)(players.toArray()[3])).setMap(railroadMap);
+            }
         }
     }
 

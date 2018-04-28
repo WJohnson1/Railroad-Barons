@@ -27,11 +27,9 @@ public class Game implements model.RailroadBarons{
      */
     public Game() {
          for (int i = 0; i < 4; i++) {
-             RailroadBaronPlayer p = new RailroadBaronPlayer(i,getRailroadMap());
+             RailroadBaronPlayer p = new RailroadBaronPlayer(i);
              players.add(p);
          }
-//         Pair p = new Pair(deck.drawACard(),deck.drawACard());
-//         getCurrentPlayer().startTurn(p);
      }
 
     /**
@@ -100,9 +98,13 @@ public class Game implements model.RailroadBarons{
              hand4[i] = c3;
          }
          ((Player)(players.toArray()[0])).reset(hand1);
+         ((RailroadBaronPlayer)(players.toArray()[0])).setMap(railroadMap);
          ((Player)(players.toArray()[1])).reset(hand2);
+         ((RailroadBaronPlayer)(players.toArray()[1])).setMap(railroadMap);
          ((Player)(players.toArray()[2])).reset(hand3);
+         ((RailroadBaronPlayer)(players.toArray()[2])).setMap(railroadMap);
          ((Player)(players.toArray()[3])).reset(hand4);
+         ((RailroadBaronPlayer)(players.toArray()[3])).setMap(railroadMap);
          Pair p = new Pair(deck.drawACard(),deck.drawACard());
          getCurrentPlayer().startTurn(p);
          for (RailroadBaronsObserver ob : this.observers){
@@ -151,9 +153,13 @@ public class Game implements model.RailroadBarons{
              hand4[i] = c3;
          }
          ((Player)(players.toArray()[0])).reset(hand1);
+         ((RailroadBaronPlayer)(players.toArray()[0])).setMap(railroadMap);
          ((Player)(players.toArray()[1])).reset(hand2);
+         ((RailroadBaronPlayer)(players.toArray()[1])).setMap(railroadMap);
          ((Player)(players.toArray()[2])).reset(hand3);
+         ((RailroadBaronPlayer)(players.toArray()[2])).setMap(railroadMap);
          ((Player)(players.toArray()[3])).reset(hand4);
+         ((RailroadBaronPlayer)(players.toArray()[3])).setMap(railroadMap);
          Pair p = new Pair(deck.drawACard(),deck.drawACard());
          getCurrentPlayer().startTurn(p);
          for (RailroadBaronsObserver ob : this.observers){
@@ -215,6 +221,10 @@ public class Game implements model.RailroadBarons{
      public void claimRoute(int row, int col) throws RailroadBaronsException {
         getCurrentPlayer().claimRoute(getRailroadMap().getRoute(row,col));
         getRailroadMap().routeClaimed(getRailroadMap().getRoute(row,col));
+         ((RailroadBaronPlayer)(players.toArray()[0])).setMap(getRailroadMap());
+         ((RailroadBaronPlayer)(players.toArray()[0])).setMap(getRailroadMap());
+         ((RailroadBaronPlayer)(players.toArray()[0])).setMap(getRailroadMap());
+         ((RailroadBaronPlayer)(players.toArray()[0])).setMap(getRailroadMap());
 
      }
 

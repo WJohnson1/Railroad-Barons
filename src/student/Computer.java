@@ -7,10 +7,7 @@ import model.PlayerObserver;
 import model.RailroadBaronsException;
 import model.Route;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Computer implements Player {
     private Baron baron;
@@ -21,7 +18,9 @@ public class Computer implements Player {
     private boolean alreadyClaimed = false;
     private Set<PlayerObserver> observers = new HashSet<>();
     private Collection<model.Route> claimedRoutes = new ArrayList<>();
-
+    private model.RailroadMap map;
+    private Boolean WtoE = true;
+    private Boolean NtoS = true;
     /**
      * Construstor for RailroadBaronPlayer. This determines what type of baron this is.
      * @param i type of case
@@ -43,6 +42,10 @@ public class Computer implements Player {
         }
         this.trainPieces = 45;
         this.score = 0;
+    }
+
+    public void setMap(model.RailroadMap map) {
+        this.map = map;
     }
 
     /**
@@ -274,13 +277,48 @@ public class Computer implements Player {
         this.trainPieces = this.trainPieces-route.getLength();
         this.score+=route.getPointValue();
         claimedRoutes.add(route);
-        for (PlayerObserver playerObserver: observers){
-            playerObserver.playerChanged(this);
-        }
 
         route.claim(this.baron);
         alreadyClaimed = true;
-
+        for(model.Route startpoint: claimedRoutes){
+            System.out.println(((student.Station)startpoint.getOrigin()).getStationLoc());
+            if ((((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.NORTHWESTERNMOST ||
+                    ((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.NORTHEASTERNMOST ||
+                    ((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.NORTHERNMOST)&NtoS){
+                for (model.Route endpoint:claimedRoutes){
+                    System.out.println(((student.Station)endpoint.getDestination()).getStationLoc());
+                    if (((student.Station)(endpoint.getDestination())).getStationLoc()==StationLocation.SOUTHWESTERNMOST ||
+                            ((student.Station)(endpoint.getDestination())).getStationLoc()==StationLocation.SOUTHEASTERNMOST ||
+                            ((student.Station)(endpoint.getDestination())).getStationLoc()==StationLocation.SOUTHERNMOST) {
+                        List<model.Station> path = buildPathDFS(startpoint.getOrigin(), endpoint.getDestination());
+                        System.out.println(path);
+                        if (path != null) {
+                            score += 5*map.getRows();
+                            NtoS = false;
+                            System.out.println("North to South Worked");
+                        }
+                    }
+                }
+            }
+            else if ((((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.WESTERNMOST ||
+                    ((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.NORTHWESTERNMOST ||
+                    ((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.SOUTHWESTERNMOST) && WtoE){
+                for (model.Route endpoint:claimedRoutes){
+                    if (((student.Station)(endpoint.getDestination())).getStationLoc()==StationLocation.NORTHEASTERNMOST ||
+                            ((student.Station)(endpoint.getDestination())).getStationLoc()==StationLocation.SOUTHEASTERNMOST ||
+                            ((student.Station)(endpoint.getDestination())).getStationLoc()==StationLocation.EASTERNMOST) {
+                        List<model.Station> path = buildPathDFS(startpoint.getOrigin(), endpoint.getDestination());
+                        if (path != null) {
+                            score += 5*map.getRows();
+                            WtoE = false;
+                        }
+                    }
+                }
+            }
+        }
+        for (PlayerObserver playerObserver: observers){
+            playerObserver.playerChanged(this);
+        }
     }
 
     /**
@@ -350,5 +388,42 @@ public class Computer implements Player {
     @Override
     public String toString(){
         return baron + " COMPUTER";
+    }
+
+    public List< model.Station > buildPathDFS(model.Station startNode, model.Station finishNode ) {
+
+        // assumes input check occurs previously
+
+
+        // Construct a visited set of all nodes reachable from the start
+        Set< model.Station > visited = new HashSet<>();
+        //visited.add( startNode );
+        return buildPathDFS( startNode, finishNode, visited );
+    }
+    private List< model.Station > buildPathDFS( model.Station start, model.Station finish, Set< model.Station > visited ) {
+
+        List<model.Station> path = null;
+
+        if (start.equals(finish)) {
+            path = new LinkedList<>();
+            path.add(start);
+            return path;
+        }
+
+        for (model.Station nbr : ((student.Station) start).getOutneighbors()) {
+            if (!visited.contains(nbr)) {
+                System.out.println(((student.RailroadMap) map).checkifRouteClaimed(start,nbr,this.baron));
+                if (((student.RailroadMap) map).checkifRouteClaimed(start,nbr,this.baron)) {
+                    visited.add(nbr);
+                    path = buildPathDFS(nbr, finish, visited);
+                    if (path != null) {
+                        path.add(0, start);
+                        return path;
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 }

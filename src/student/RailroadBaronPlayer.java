@@ -27,7 +27,7 @@ public class RailroadBaronPlayer implements Player {
      * Construstor for RailroadBaronPlayer. This determines what type of baron this is.
      * @param i type of case
      */
-    public  RailroadBaronPlayer(int i,model.RailroadMap map){
+    public  RailroadBaronPlayer(int i){
         switch (i){
             case 0:
                 this.baron = Baron.BLUE;
@@ -42,9 +42,12 @@ public class RailroadBaronPlayer implements Player {
                 this.baron = Baron.YELLOW;
                 break;
         }
-        this.map = map;
         this.trainPieces = 45;
         this.score = 0;
+    }
+
+    public void setMap(model.RailroadMap map) {
+        this.map = map;
     }
 
     /**
@@ -275,25 +278,26 @@ public class RailroadBaronPlayer implements Player {
         this.score+=route.getPointValue();
 
         claimedRoutes.add(route);
-        for (PlayerObserver playerObserver: observers){
-            playerObserver.playerChanged(this);
-        }
+
 
         route.claim(this.baron);
         alreadyClaimed = true;
         for(model.Route startpoint: claimedRoutes){
+            System.out.println(((student.Station)startpoint.getOrigin()).getStationLoc());
             if ((((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.NORTHWESTERNMOST ||
                     ((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.NORTHEASTERNMOST ||
                     ((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.NORTHERNMOST)&NtoS){
                 for (model.Route endpoint:claimedRoutes){
-                    if (((student.Station)(endpoint.getOrigin())).getStationLoc()==StationLocation.SOUTHWESTERNMOST ||
-                            ((student.Station)(endpoint.getOrigin())).getStationLoc()==StationLocation.SOUTHEASTERNMOST ||
-                            ((student.Station)(endpoint.getOrigin())).getStationLoc()==StationLocation.SOUTHERNMOST) {
-
+                    System.out.println(((student.Station)endpoint.getDestination()).getStationLoc());
+                    if (((student.Station)(endpoint.getDestination())).getStationLoc()==StationLocation.SOUTHWESTERNMOST ||
+                            ((student.Station)(endpoint.getDestination())).getStationLoc()==StationLocation.SOUTHEASTERNMOST ||
+                            ((student.Station)(endpoint.getDestination())).getStationLoc()==StationLocation.SOUTHERNMOST) {
                         List<model.Station> path = buildPathDFS(startpoint.getOrigin(), endpoint.getDestination());
+                        System.out.println(path);
                         if (path != null) {
                             score += 5*map.getRows();
                             NtoS = false;
+                            System.out.println("North to South Worked");
                         }
                     }
                 }
@@ -302,9 +306,9 @@ public class RailroadBaronPlayer implements Player {
                     ((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.NORTHWESTERNMOST ||
                     ((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.SOUTHWESTERNMOST) && WtoE){
                 for (model.Route endpoint:claimedRoutes){
-                    if (((student.Station)(endpoint.getOrigin())).getStationLoc()==StationLocation.NORTHEASTERNMOST ||
-                            ((student.Station)(endpoint.getOrigin())).getStationLoc()==StationLocation.SOUTHEASTERNMOST ||
-                            ((student.Station)(endpoint.getOrigin())).getStationLoc()==StationLocation.EASTERNMOST) {
+                    if (((student.Station)(endpoint.getDestination())).getStationLoc()==StationLocation.NORTHEASTERNMOST ||
+                            ((student.Station)(endpoint.getDestination())).getStationLoc()==StationLocation.SOUTHEASTERNMOST ||
+                            ((student.Station)(endpoint.getDestination())).getStationLoc()==StationLocation.EASTERNMOST) {
                         List<model.Station> path = buildPathDFS(startpoint.getOrigin(), endpoint.getDestination());
                         if (path != null) {
                             score += 5*map.getRows();
@@ -313,6 +317,9 @@ public class RailroadBaronPlayer implements Player {
                     }
                 }
             }
+        }
+        for (PlayerObserver playerObserver: observers){
+            playerObserver.playerChanged(this);
         }
     }
 
@@ -406,6 +413,7 @@ public class RailroadBaronPlayer implements Player {
 
         for (model.Station nbr : ((student.Station) start).getOutneighbors()) {
             if (!visited.contains(nbr)) {
+                System.out.println(((student.RailroadMap) map).checkifRouteClaimed(start,nbr,this.baron));
                 if (((student.RailroadMap) map).checkifRouteClaimed(start,nbr,this.baron)) {
                     visited.add(nbr);
                     path = buildPathDFS(nbr, finish, visited);

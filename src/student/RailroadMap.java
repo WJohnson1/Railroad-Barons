@@ -170,7 +170,7 @@ public class RailroadMap implements model.RailroadMap {
     }
     public boolean checkifRouteClaimed(model.Station start, model.Station end,model.Baron baron){
         for(model.Route route: this.routes){
-            if (route.getOrigin() == start && route.getOrigin() == end){
+            if (route.getOrigin() == start && route.getDestination() == end){
                 if (route.getBaron() == baron){
                     return true;
                 }
