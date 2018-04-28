@@ -40,6 +40,10 @@ public class Station extends student.Space implements model.Station{ //extends s
         this.StationLoc = type;
     }
 
+    public StationLocation getStationLoc(){
+        return StationLoc;
+    }
+
     /**
      * Returns the ID of the station
      * @return the ID of the station

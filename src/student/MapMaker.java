@@ -87,14 +87,32 @@ public class MapMaker implements model.MapMaker {
                     routes.add(new Route(Integer.parseInt(cut[0]), Integer.parseInt(cut[1]), owner, this.stations));
                     for (Integer key : this.stations.keySet()){
                         student.Station current = (student.Station)stations.get(key);
-                        if (current.getRow() == northernmost){
+                        if (current.getRow() == northernmost & current.getCol() == easternmost){
+                            current.setStationLoc(StationLocation.NORTHEASTERNMOST);
+                        }
+                        else if (current.getRow() == northernmost & current.getCol() == westernmost){
+                            current.setStationLoc(StationLocation.NORTHWESTERNMOST);
+                        }
+                        else if (current.getRow() == southernmost & current.getCol() == easternmost){
+                            current.setStationLoc(StationLocation.SOUTHEASTERNMOST);
+                        }
+                        else if (current.getRow() == southernmost & current.getCol() == westernmost){
+                            current.setStationLoc(StationLocation.SOUTHWESTERNMOST);
+                        }
+                        else if (current.getRow() == northernmost){
                             current.setStationLoc(StationLocation.NORTHERNMOST);
                         }
-                        if (current.getRow() == southernmost){
+                        else if (current.getRow() == southernmost){
                             current.setStationLoc(StationLocation.SOUTHERNMOST);
                         }
-                        if (current.getCol() == northernmost){
-                            current.setStationLoc(StationLocation.NORTHEASTERNMOST);
+                        else if (current.getCol() == westernmost){
+                            current.setStationLoc(StationLocation.WESTERNMOST);
+                        }
+                        else if (current.getCol() == easternmost){
+                            current.setStationLoc(StationLocation.EASTERNMOST);
+                        }
+                        else {
+                            current.setStationLoc(StationLocation.CENTERED);
                         }
                         if (Integer.parseInt(cut[0]) == key){
                             ((student.Station)stations.get(key)).addNeighbor(stations.get(Integer.parseInt(cut[1])));
