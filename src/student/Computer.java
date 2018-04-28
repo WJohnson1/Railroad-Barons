@@ -189,30 +189,25 @@ public class Computer implements Player {
     public boolean canClaimRoute(model.Route route) {
         boolean a = false;
         if (route.getBaron() == Baron.UNCLAIMED){
-            if (!alreadyClaimed){
-                if ((this.countCardsInHand(model.Card.BLACK))>=route.getLength() || ((this.countCardsInHand(model.Card.BLACK) + 1)>=route.getLength() && this.countCardsInHand(model.Card.WILD)>0)){
-                    a =  true;
-                }
-                else if ((this.countCardsInHand(model.Card.BLUE))>=route.getLength() || ((this.countCardsInHand(model.Card.BLUE) + 1)>=route.getLength() && this.countCardsInHand(model.Card.WILD)>0)){
-                    a =  true;
-                }
-                else if ((this.countCardsInHand(model.Card.GREEN))>=route.getLength() || ((this.countCardsInHand(model.Card.GREEN) + 1)>=route.getLength() && this.countCardsInHand(model.Card.WILD)>0)){
-                    a =  true;
-                }
-                else if ((this.countCardsInHand(model.Card.ORANGE))>=route.getLength() || ((this.countCardsInHand(model.Card.ORANGE) + 1)>=route.getLength() && this.countCardsInHand(model.Card.WILD)>0)){
-                    a =  true;
-                }
-                else if ((this.countCardsInHand(model.Card.PINK))>=route.getLength() || ((this.countCardsInHand(model.Card.PINK) + 1)>=route.getLength() && this.countCardsInHand(model.Card.WILD)>0)){
-                    a =  true;
-                }
-                else if ((this.countCardsInHand(model.Card.RED))>=route.getLength() || ((this.countCardsInHand(model.Card.RED) + 1)>=route.getLength() && this.countCardsInHand(model.Card.WILD)>0)){
-                    a =  true;
-                }
-                else if ((this.countCardsInHand(model.Card.WHITE))>=route.getLength() || ((this.countCardsInHand(model.Card.WHITE) + 1)>=route.getLength() && this.countCardsInHand(model.Card.WILD)>0)){
-                    a =  true;
-                }
-                else if ((this.countCardsInHand(model.Card.YELLOW))>=route.getLength() || ((this.countCardsInHand(model.Card.YELLOW) + 1)>=route.getLength() && this.countCardsInHand(model.Card.WILD)>0)){
-                    a =  true;
+            if (trainPieces>=route.getLength()) {
+                if (!alreadyClaimed) {
+                    if ((this.countCardsInHand(model.Card.BLACK)) >= route.getLength() || ((this.countCardsInHand(model.Card.BLACK) + 1) >= route.getLength() && this.countCardsInHand(model.Card.WILD) > 0)) {
+                        a = true;
+                    } else if ((this.countCardsInHand(model.Card.BLUE)) >= route.getLength() || ((this.countCardsInHand(model.Card.BLUE) + 1) >= route.getLength() && this.countCardsInHand(model.Card.WILD) > 0)) {
+                        a = true;
+                    } else if ((this.countCardsInHand(model.Card.GREEN)) >= route.getLength() || ((this.countCardsInHand(model.Card.GREEN) + 1) >= route.getLength() && this.countCardsInHand(model.Card.WILD) > 0)) {
+                        a = true;
+                    } else if ((this.countCardsInHand(model.Card.ORANGE)) >= route.getLength() || ((this.countCardsInHand(model.Card.ORANGE) + 1) >= route.getLength() && this.countCardsInHand(model.Card.WILD) > 0)) {
+                        a = true;
+                    } else if ((this.countCardsInHand(model.Card.PINK)) >= route.getLength() || ((this.countCardsInHand(model.Card.PINK) + 1) >= route.getLength() && this.countCardsInHand(model.Card.WILD) > 0)) {
+                        a = true;
+                    } else if ((this.countCardsInHand(model.Card.RED)) >= route.getLength() || ((this.countCardsInHand(model.Card.RED) + 1) >= route.getLength() && this.countCardsInHand(model.Card.WILD) > 0)) {
+                        a = true;
+                    } else if ((this.countCardsInHand(model.Card.WHITE)) >= route.getLength() || ((this.countCardsInHand(model.Card.WHITE) + 1) >= route.getLength() && this.countCardsInHand(model.Card.WILD) > 0)) {
+                        a = true;
+                    } else if ((this.countCardsInHand(model.Card.YELLOW)) >= route.getLength() || ((this.countCardsInHand(model.Card.YELLOW) + 1) >= route.getLength() && this.countCardsInHand(model.Card.WILD) > 0)) {
+                        a = true;
+                    }
                 }
             }
         }
@@ -255,6 +250,7 @@ public class Computer implements Player {
                 completed = true;
             }
         }
+        a = 0;
         if (!completed) {
             for (model.Card c : hand) {
                 if (c!= model.Card.WILD&&(this.countCardsInHand(c) + this.countCardsInHand(model.Card.WILD)) >= route.getLength()) {

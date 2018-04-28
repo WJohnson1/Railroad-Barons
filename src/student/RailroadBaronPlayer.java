@@ -187,30 +187,25 @@ public class RailroadBaronPlayer implements Player {
     @Override
     public boolean canClaimRoute(Route route) {
         if (route.getBaron() == Baron.UNCLAIMED){
-            if (!alreadyClaimed){
-                if ((this.countCardsInHand(Card.BLACK))>=route.getLength() || ((this.countCardsInHand(Card.BLACK) + 1)>=route.getLength() && this.countCardsInHand(Card.WILD)>0)){
-                    return true;
-                }
-                else if ((this.countCardsInHand(Card.BLUE))>=route.getLength() || ((this.countCardsInHand(Card.BLUE) + 1)>=route.getLength() && this.countCardsInHand(Card.WILD)>0)){
-                    return true;
-                }
-                else if ((this.countCardsInHand(Card.GREEN))>=route.getLength() || ((this.countCardsInHand(Card.GREEN) + 1)>=route.getLength() && this.countCardsInHand(Card.WILD)>0)){
-                    return true;
-                }
-                else if ((this.countCardsInHand(Card.ORANGE))>=route.getLength() || ((this.countCardsInHand(Card.ORANGE) + 1)>=route.getLength() && this.countCardsInHand(Card.WILD)>0)){
-                    return true;
-                }
-                else if ((this.countCardsInHand(Card.PINK))>=route.getLength() || ((this.countCardsInHand(Card.PINK) + 1)>=route.getLength() && this.countCardsInHand(Card.WILD)>0)){
-                    return true;
-                }
-                else if ((this.countCardsInHand(Card.RED))>=route.getLength() || ((this.countCardsInHand(Card.RED) + 1)>=route.getLength() && this.countCardsInHand(Card.WILD)>0)){
-                    return true;
-                }
-                else if ((this.countCardsInHand(Card.WHITE))>=route.getLength() || ((this.countCardsInHand(Card.WHITE) + 1)>=route.getLength() && this.countCardsInHand(Card.WILD)>0)){
-                    return true;
-                }
-                else if ((this.countCardsInHand(Card.YELLOW))>=route.getLength() || ((this.countCardsInHand(Card.YELLOW) + 1)>=route.getLength() && this.countCardsInHand(Card.WILD)>0)){
-                    return true;
+            if (trainPieces>=route.getLength()) {
+                if (!alreadyClaimed) {
+                    if ((this.countCardsInHand(Card.BLACK)) >= route.getLength() || ((this.countCardsInHand(Card.BLACK) + 1) >= route.getLength() && this.countCardsInHand(Card.WILD) > 0)) {
+                        return true;
+                    } else if ((this.countCardsInHand(Card.BLUE)) >= route.getLength() || ((this.countCardsInHand(Card.BLUE) + 1) >= route.getLength() && this.countCardsInHand(Card.WILD) > 0)) {
+                        return true;
+                    } else if ((this.countCardsInHand(Card.GREEN)) >= route.getLength() || ((this.countCardsInHand(Card.GREEN) + 1) >= route.getLength() && this.countCardsInHand(Card.WILD) > 0)) {
+                        return true;
+                    } else if ((this.countCardsInHand(Card.ORANGE)) >= route.getLength() || ((this.countCardsInHand(Card.ORANGE) + 1) >= route.getLength() && this.countCardsInHand(Card.WILD) > 0)) {
+                        return true;
+                    } else if ((this.countCardsInHand(Card.PINK)) >= route.getLength() || ((this.countCardsInHand(Card.PINK) + 1) >= route.getLength() && this.countCardsInHand(Card.WILD) > 0)) {
+                        return true;
+                    } else if ((this.countCardsInHand(Card.RED)) >= route.getLength() || ((this.countCardsInHand(Card.RED) + 1) >= route.getLength() && this.countCardsInHand(Card.WILD) > 0)) {
+                        return true;
+                    } else if ((this.countCardsInHand(Card.WHITE)) >= route.getLength() || ((this.countCardsInHand(Card.WHITE) + 1) >= route.getLength() && this.countCardsInHand(Card.WILD) > 0)) {
+                        return true;
+                    } else if ((this.countCardsInHand(Card.YELLOW)) >= route.getLength() || ((this.countCardsInHand(Card.YELLOW) + 1) >= route.getLength() && this.countCardsInHand(Card.WILD) > 0)) {
+                        return true;
+                    }
                 }
             }
         }
@@ -242,11 +237,11 @@ public class RailroadBaronPlayer implements Player {
         boolean completed = false;
         int w = 0;
         int a = 0;
-        for (Card c: hand) {
+        for (Card c: this.hand) {
             if (this.countCardsInHand(c) >= route.getLength() & !c.equals(Card.WILD)) {
-                for (int i = 0; i < hand.size(); i++) {
-                    if (hand.get(i).equals(c) && a < route.getLength()) {
-                        hand.set(i, Card.NONE);
+                for (int i = 0; i < this.hand.size(); i++) {
+                    if (this.hand.get(i).equals(c) && a < route.getLength()) {
+                        this.hand.set(i, Card.NONE);
                         a++;
                     }
                 }
@@ -257,11 +252,11 @@ public class RailroadBaronPlayer implements Player {
             for (Card c : hand) {
                 if (c!=Card.WILD&&(this.countCardsInHand(c) + this.countCardsInHand(Card.WILD)) >= route.getLength()) {
                     for (int i = 0; i < hand.size(); i++) {
-                        if (hand.get(i).equals(c) && a < route.getLength()) {
-                            hand.set(i, Card.NONE);
+                        if (this.hand.get(i).equals(c) && a < route.getLength()) {
+                            this.hand.set(i, Card.NONE);
                             a++;
-                        } else if (hand.get(i).equals(Card.WILD) && w < 1) {
-                            hand.set(i, Card.NONE);
+                        } else if (this.hand.get(i).equals(Card.WILD) && w < 1) {
+                            this.hand.set(i, Card.NONE);
                             w++;
                             a++;
                         }

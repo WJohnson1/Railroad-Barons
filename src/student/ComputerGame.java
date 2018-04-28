@@ -253,13 +253,12 @@ public class ComputerGame implements model.RailroadBarons{
                                 break;
                             }
                         }
-                        endTurn();
-                    } catch (RailroadBaronsException e) {
+                    }
+                    catch (RailroadBaronsException e) {
                         e.printStackTrace();
                     }
-                } else {
-                    endTurn();
                 }
+                endTurn();
             }
         }
         else{
