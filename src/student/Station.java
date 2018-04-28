@@ -90,4 +90,8 @@ public class Station extends student.Space implements model.Station{ //extends s
     public boolean collocated(Space other) {
         return other.getRow() == this.getRow() && other.getCol() == this.getCol();
     }
+
+    public ArrayList<model.Station> getOutneighbors() {
+        return Outneighbors;
+    }
 }

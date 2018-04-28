@@ -23,7 +23,7 @@ public class ComputerGame implements model.RailroadBarons{
     public ComputerGame() {
         for (int i = 0; i < 4; i++) {
             if (i==0) {
-                RailroadBaronPlayer p = new RailroadBaronPlayer(i);
+                RailroadBaronPlayer p = new RailroadBaronPlayer(i,getRailroadMap());
                 players.add(p);
             }
             else{

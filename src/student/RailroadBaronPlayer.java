@@ -19,13 +19,15 @@ public class RailroadBaronPlayer implements Player {
     private int trainPieces;
     private boolean alreadyClaimed = false;
     private Set<model.PlayerObserver> observers = new HashSet<>();
-    private  Collection<model.Route> claimedRoutes = new ArrayList<>();
-
+    private Collection<model.Route> claimedRoutes = new ArrayList<>();
+    private model.RailroadMap map;
+    private boolean NtoS = true;
+    private boolean WtoE = true;
     /**
      * Construstor for RailroadBaronPlayer. This determines what type of baron this is.
      * @param i type of case
      */
-    public  RailroadBaronPlayer(int i){
+    public  RailroadBaronPlayer(int i,model.RailroadMap map){
         switch (i){
             case 0:
                 this.baron = Baron.BLUE;
@@ -40,6 +42,7 @@ public class RailroadBaronPlayer implements Player {
                 this.baron = Baron.YELLOW;
                 break;
         }
+        this.map = map;
         this.trainPieces = 45;
         this.score = 0;
     }
@@ -278,7 +281,39 @@ public class RailroadBaronPlayer implements Player {
 
         route.claim(this.baron);
         alreadyClaimed = true;
+        for(model.Route startpoint: claimedRoutes){
+            if ((((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.NORTHWESTERNMOST ||
+                    ((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.NORTHEASTERNMOST ||
+                    ((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.NORTHERNMOST)&NtoS){
+                for (model.Route endpoint:claimedRoutes){
+                    if (((student.Station)(endpoint.getOrigin())).getStationLoc()==StationLocation.SOUTHWESTERNMOST ||
+                            ((student.Station)(endpoint.getOrigin())).getStationLoc()==StationLocation.SOUTHEASTERNMOST ||
+                            ((student.Station)(endpoint.getOrigin())).getStationLoc()==StationLocation.SOUTHERNMOST) {
 
+                        List<model.Station> path = buildPathDFS(startpoint.getOrigin(), endpoint.getDestination());
+                        if (path != null) {
+                            score += 5*map.getRows();
+                            NtoS = false;
+                        }
+                    }
+                }
+            }
+            else if ((((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.WESTERNMOST ||
+                    ((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.NORTHWESTERNMOST ||
+                    ((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.SOUTHWESTERNMOST) && WtoE){
+                for (model.Route endpoint:claimedRoutes){
+                    if (((student.Station)(endpoint.getOrigin())).getStationLoc()==StationLocation.NORTHEASTERNMOST ||
+                            ((student.Station)(endpoint.getOrigin())).getStationLoc()==StationLocation.SOUTHEASTERNMOST ||
+                            ((student.Station)(endpoint.getOrigin())).getStationLoc()==StationLocation.EASTERNMOST) {
+                        List<model.Station> path = buildPathDFS(startpoint.getOrigin(), endpoint.getDestination());
+                        if (path != null) {
+                            score += 5*map.getRows();
+                            WtoE = false;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -348,5 +383,40 @@ public class RailroadBaronPlayer implements Player {
     @Override
     public String toString(){
         return baron + " Baron";
+    }
+    public List< model.Station > buildPathDFS( model.Station startNode, model.Station finishNode ) {
+
+        // assumes input check occurs previously
+
+
+        // Construct a visited set of all nodes reachable from the start
+        Set< model.Station > visited = new HashSet<>();
+        //visited.add( startNode );
+        return buildPathDFS( startNode, finishNode, visited );
+    }
+    private List< model.Station > buildPathDFS( model.Station start, model.Station finish, Set< model.Station > visited ) {
+
+        List<model.Station> path = null;
+
+        if (start.equals(finish)) {
+            path = new LinkedList<>();
+            path.add(start);
+            return path;
+        }
+
+        for (model.Station nbr : ((student.Station) start).getOutneighbors()) {
+            if (!visited.contains(nbr)) {
+                if (((student.RailroadMap) map).checkifRouteClaimed(start,nbr,this.baron)) {
+                    visited.add(nbr);
+                    path = buildPathDFS(nbr, finish, visited);
+                    if (path != null) {
+                        path.add(0, start);
+                        return path;
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 }

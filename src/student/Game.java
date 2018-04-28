@@ -27,7 +27,7 @@ public class Game implements model.RailroadBarons{
      */
     public Game() {
          for (int i = 0; i < 4; i++) {
-             RailroadBaronPlayer p = new RailroadBaronPlayer(i);
+             RailroadBaronPlayer p = new RailroadBaronPlayer(i,getRailroadMap());
              players.add(p);
          }
 //         Pair p = new Pair(deck.drawACard(),deck.drawACard());

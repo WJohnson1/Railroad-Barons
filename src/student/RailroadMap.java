@@ -168,6 +168,16 @@ public class RailroadMap implements model.RailroadMap {
         }
         return smallest;
     }
+    public boolean checkifRouteClaimed(model.Station start, model.Station end,model.Baron baron){
+        for(model.Route route: this.routes){
+            if (route.getOrigin() == start && route.getOrigin() == end){
+                if (route.getBaron() == baron){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     /**
      * Returns all of the {@link Route Routes} in this map.
