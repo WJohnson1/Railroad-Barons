@@ -270,6 +270,7 @@ public class RailroadBaronPlayer implements Player {
         }
         this.trainPieces = this.trainPieces-route.getLength();
         this.score+=route.getPointValue();
+
         claimedRoutes.add(route);
         for (PlayerObserver playerObserver: observers){
             playerObserver.playerChanged(this);

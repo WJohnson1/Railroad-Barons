@@ -33,12 +33,20 @@ public class MapMaker implements model.MapMaker {
         try {
             String line = file.readLine();
             Boolean isRoutes = false;
+            int easternmost = 0;
+            int southernmost = 0;
             while ( line != null) {
                 String[] cut = line.split(" ");
                 if (!line.equals("##ROUTES##") && !isRoutes) {
                     int id = Integer.parseInt(cut[0]);
                     int row = Integer.parseInt(cut[1]);
+                    if (row>southernmost){
+                        southernmost = row;
+                    }
                     int col = Integer.parseInt(cut[2]);
+                    if (col>easternmost){
+                        easternmost = col;
+                    }
                     String name = "";
                     for (int i = 3; i < cut.length; i++) {
                         name = name + cut[i];
@@ -80,7 +88,7 @@ public class MapMaker implements model.MapMaker {
                 }
                 line = file.readLine();
             }
-            model.RailroadMap map = new student.RailroadMap(20, 25, this.stations);
+            model.RailroadMap map = new student.RailroadMap(southernmost+1, easternmost+1, this.stations);
             for (model.Route route : this.routes){
                 map.routeClaimed(route);
             }
