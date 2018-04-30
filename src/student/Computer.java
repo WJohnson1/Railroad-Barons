@@ -252,7 +252,7 @@ public class Computer implements Player {
         int w = 0;
         int a = 0;
         for (model.Card c: hand) {
-            if (this.countCardsInHand(c) >= route.getLength() & !c.equals(model.Card.WILD)) {
+            if (c!=Card.NONE && this.countCardsInHand(c) >= route.getLength() & !c.equals(model.Card.WILD)) {
                 for (int i = 0; i < hand.size(); i++) {
                     if (hand.get(i).equals(c) && a < route.getLength()) {
                         hand.set(i, model.Card.NONE);
@@ -265,7 +265,7 @@ public class Computer implements Player {
         a = 0;
         if (!completed) {
             for (model.Card c : hand) {
-                if (c!= model.Card.WILD&&(this.countCardsInHand(c) + this.countCardsInHand(model.Card.WILD)) >= route.getLength()) {
+                if (c!=Card.NONE && c!= model.Card.WILD&&(this.countCardsInHand(c) + this.countCardsInHand(model.Card.WILD)) >= route.getLength()) {
                     for (int i = 0; i < hand.size(); i++) {
                         if (hand.get(i).equals(c) && a < route.getLength()) {
                             hand.set(i, model.Card.NONE);
