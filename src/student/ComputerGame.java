@@ -105,33 +105,9 @@ public class ComputerGame implements model.RailroadBarons{
             hand4[i] = c3;
         }
         ((Player)(players.toArray()[0])).reset(hand1);
-//        if ((players.toArray()[0]).toString().contains("COMPUTER")){
-//            ((Computer)(players.toArray()[0])).setMap(railroadMap);
-//        }
-//        else{
-//            ((RailroadBaronPlayer)(players.toArray()[0])).setMap(railroadMap);
-//        }
         ((Player)(players.toArray()[1])).reset(hand2);
-//        if ((players.toArray()[1]).toString().contains("COMPUTER")){
-//            ((Computer)(players.toArray()[1])).setMap(railroadMap);
-//        }
-//        else{
-//            ((RailroadBaronPlayer)(players.toArray()[1])).setMap(railroadMap);
-//        }
         ((Player)(players.toArray()[2])).reset(hand3);
-//        if ((players.toArray()[2]).toString().contains("COMPUTER")){
-//            ((Computer)(players.toArray()[2])).setMap(railroadMap);
-//        }
-//        else{
-//            ((RailroadBaronPlayer)(players.toArray()[2])).setMap(railroadMap);
-//        }
         ((Player)(players.toArray()[3])).reset(hand4);
-//        if ((players.toArray()[3]).toString().contains("COMPUTER")){
-//            ((Computer)(players.toArray()[3])).setMap(railroadMap);
-//        }
-//        else{
-//            ((RailroadBaronPlayer)(players.toArray()[3])).setMap(railroadMap);
-//        }
         for (int i = 0; i < 4; i++){
             if ((players.toArray()[i]).toString().contains("COMPUTER")){
                 ((Computer)(players.toArray()[i])).setMap(railroadMap);
@@ -188,33 +164,9 @@ public class ComputerGame implements model.RailroadBarons{
             hand4[i] = c3;
         }
         ((Player)(players.toArray()[0])).reset(hand1);
-//        if ((players.toArray()[0]).toString().contains("COMPUTER")){
-//            ((Computer)(players.toArray()[0])).setMap(railroadMap);
-//        }
-//        else{
-//            ((RailroadBaronPlayer)(players.toArray()[0])).setMap(railroadMap);
-//        }
         ((Player)(players.toArray()[1])).reset(hand2);
-//        if ((players.toArray()[1]).toString().contains("COMPUTER")){
-//            ((Computer)(players.toArray()[1])).setMap(railroadMap);
-//        }
-//        else{
-//            ((RailroadBaronPlayer)(players.toArray()[1])).setMap(railroadMap);
-//        }
         ((Player)(players.toArray()[2])).reset(hand3);
-//        if ((players.toArray()[2]).toString().contains("COMPUTER")){
-//            ((Computer)(players.toArray()[2])).setMap(railroadMap);
-//        }
-//        else{
-//            ((RailroadBaronPlayer)(players.toArray()[2])).setMap(railroadMap);
-//        }
         ((Player)(players.toArray()[3])).reset(hand4);
-//        if ((players.toArray()[3]).toString().contains("COMPUTER")){
-//            ((Computer)(players.toArray()[3])).setMap(railroadMap);
-//        }
-//        else{
-//            ((RailroadBaronPlayer)(players.toArray()[3])).setMap(railroadMap);
-//        }
         for (int i = 0; i < 4; i++){
             if ((players.toArray()[i]).toString().contains("COMPUTER")){
                 ((Computer)(players.toArray()[i])).setMap(railroadMap);
@@ -282,40 +234,15 @@ public class ComputerGame implements model.RailroadBarons{
      */
     @Override
     public void claimRoute(int row, int col) throws RailroadBaronsException {
-            getCurrentPlayer().claimRoute(getRailroadMap().getRoute(row, col));
-            getRailroadMap().routeClaimed(getRailroadMap().getRoute(row, col));
-//            if ((players.toArray()[0]).toString().contains("COMPUTER")){
-//                ((Computer)(players.toArray()[0])).setMap(railroadMap);
-//            }
-//            else{
-//                ((RailroadBaronPlayer)(players.toArray()[0])).setMap(railroadMap);
-//            }
-//            if ((players.toArray()[1]).toString().contains("COMPUTER")){
-//                ((Computer)(players.toArray()[1])).setMap(railroadMap);
-//            }
-//            else{
-//                ((RailroadBaronPlayer)(players.toArray()[1])).setMap(railroadMap);
-//            }
-//            if ((players.toArray()[2]).toString().contains("COMPUTER")){
-//                ((Computer)(players.toArray()[2])).setMap(railroadMap);
-//            }
-//            else{
-//                ((RailroadBaronPlayer)(players.toArray()[2])).setMap(railroadMap);
-//            }
-//            if ((players.toArray()[3]).toString().contains("COMPUTER")){
-//                ((Computer)(players.toArray()[3])).setMap(railroadMap);
-//            }
-//            else{
-//                ((RailroadBaronPlayer)(players.toArray()[3])).setMap(railroadMap);
-//            }
-            for (int i = 0; i < 4; i++){
-                if ((players.toArray()[i]).toString().contains("COMPUTER")){
-                    ((Computer)(players.toArray()[i])).setMap(railroadMap);
-                }
-                else{
-                    ((RailroadBaronPlayer)(players.toArray()[i])).setMap(railroadMap);
-                }
+        getCurrentPlayer().claimRoute(getRailroadMap().getRoute(row, col));
+        getRailroadMap().routeClaimed(getRailroadMap().getRoute(row, col));
+        for (int i = 0; i < 4; i++) {
+            if ((players.toArray()[i]).toString().contains("COMPUTER")) {
+                ((Computer) (players.toArray()[i])).setMap(railroadMap);
+            } else {
+                ((RailroadBaronPlayer) (players.toArray()[i])).setMap(railroadMap);
             }
+        }
     }
 
     /**
