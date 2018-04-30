@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+/**
+ * This class is what runs the Lonely RailroadBarons Game.
+ * @authors Gabriel Jusino, William Johnson
+ * @emails gej9887, wcj7833
+ */
 public class ComputerGame implements model.RailroadBarons{
     private Collection<RailroadBaronsObserver> observers = new ArrayList<>();
     private Collection<Player> players = new ArrayList<>();
@@ -18,7 +23,7 @@ public class ComputerGame implements model.RailroadBarons{
     private model.RailroadMap railroadMap;
 
     /**
-     * Constructor for Game. This creates four players to play the game.
+     * Constructor for Computer Game. This creates one player and three computers to play the game.
      */
     public ComputerGame() {
         for (int i = 0; i < 4; i++) {
@@ -292,6 +297,8 @@ public class ComputerGame implements model.RailroadBarons{
 
     /**
      * Called when the current {@linkplain Player player} ends their turn.
+     * Will automatically start and end the current player's turn if the player is
+     * a computer
      */
     @Override
     public void endTurn() {

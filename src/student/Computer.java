@@ -10,7 +10,9 @@ import model.Route;
 import java.util.*;
 
 /**
- *
+ * This class is for each individual computer in the Railroads Baron game.
+ * @authors Gabriel Jusino, William Johnson
+ * @emails gej9887, wcj7833
  */
 public class Computer implements Player {
     private Baron baron;
@@ -25,7 +27,7 @@ public class Computer implements Player {
     private Boolean WtoE = true;
     private Boolean NtoS = true;
     /**
-     * Construstor for RailroadBaronPlayer. This determines what type of baron this is.
+     * Construstor for Computer. This determines what type of baron this computer will be.
      * @param i type of case
      */
     public  Computer(int i){
@@ -47,6 +49,10 @@ public class Computer implements Player {
         this.score = 0;
     }
 
+    /**
+     * Sets the map of the computer
+     * @param map the map of the computer
+     */
     public void setMap(model.RailroadMap map) {
         this.map = map;
     }
@@ -393,16 +399,37 @@ public class Computer implements Player {
         return baron + " COMPUTER";
     }
 
-    public List< model.Station > buildPathDFS(model.Station startNode, model.Station finishNode ) {
-
-        // assumes input check occurs previously
-
+    /**
+     * Create a path from a starting node to a finishing node if such
+     * a path exists.
+     * Uses depth-first search to determine if a path exists.
+     * This pair of public and private methods uses a path list.
+     * Another approach, shown below in the BFS code, is associating a
+     * predecessor with each node.
+     *
+     * @rit.pre the arguments correspond to nodes in the graph
+     * @param startNode  with starting node
+     * @param finishNode finishing node
+     * @return an iteration from start to finish, or null if none exists
+     */
+    private List< model.Station > buildPathDFS(model.Station startNode, model.Station finishNode ) {
 
         // Construct a visited set of all nodes reachable from the start
         Set< model.Station > visited = new HashSet<>();
         //visited.add( startNode );
         return buildPathDFS( startNode, finishNode, visited );
     }
+
+    /**
+     * Recursive function that visits all nodes reachable from the given node
+     * in depth-first search fashion. Visited list is updated in the process.
+     *
+     * @param start the node from which to search
+     * @param finish the node for which to search
+     * @param visited the list of nodes that have already been visited
+     * @return the path from start to finish as a List,
+     *         or if no path, an empty List.
+     */
     private List< model.Station > buildPathDFS( model.Station start, model.Station finish, Set< model.Station > visited ) {
 
         List<model.Station> path = null;
