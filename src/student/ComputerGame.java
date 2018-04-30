@@ -288,7 +288,6 @@ public class ComputerGame implements model.RailroadBarons{
             else{
                 ((RailroadBaronPlayer)(players.toArray()[3])).setMap(railroadMap);
             }
-
     }
 
     /**

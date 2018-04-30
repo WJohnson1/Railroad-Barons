@@ -9,6 +9,9 @@ import model.Route;
 
 import java.util.*;
 
+/**
+ *
+ */
 public class Computer implements Player {
     private Baron baron;
     private model.Pair lastTwoCards = new student.Pair(model.Card.NONE, model.Card.NONE);
@@ -412,7 +415,6 @@ public class Computer implements Player {
 
         for (model.Station nbr : ((student.Station) start).getOutneighbors()) {
             if (!visited.contains(nbr)) {
-                System.out.println(((student.RailroadMap) map).checkifRouteClaimed(start,nbr,this.baron));
                 if (((student.RailroadMap) map).checkifRouteClaimed(start,nbr,this.baron)) {
                     visited.add(nbr);
                     path = buildPathDFS(nbr, finish, visited);
