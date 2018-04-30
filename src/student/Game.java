@@ -221,11 +221,9 @@ public class Game implements model.RailroadBarons{
      public void claimRoute(int row, int col) throws RailroadBaronsException {
         getCurrentPlayer().claimRoute(getRailroadMap().getRoute(row,col));
         getRailroadMap().routeClaimed(getRailroadMap().getRoute(row,col));
-         ((RailroadBaronPlayer)(players.toArray()[0])).setMap(getRailroadMap());
-         ((RailroadBaronPlayer)(players.toArray()[0])).setMap(getRailroadMap());
-         ((RailroadBaronPlayer)(players.toArray()[0])).setMap(getRailroadMap());
-         ((RailroadBaronPlayer)(players.toArray()[0])).setMap(getRailroadMap());
-
+        for (int i = 0; i < 4; i++){
+            ((RailroadBaronPlayer)(players.toArray()[i])).setMap(getRailroadMap());
+        }
      }
 
     /**

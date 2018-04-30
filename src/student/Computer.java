@@ -290,21 +290,17 @@ public class Computer implements Player {
         route.claim(this.baron);
         alreadyClaimed = true;
         for(model.Route startpoint: claimedRoutes){
-            System.out.println(((student.Station)startpoint.getOrigin()).getStationLoc());
             if ((((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.NORTHWESTERNMOST ||
                     ((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.NORTHEASTERNMOST ||
                     ((student.Station)(startpoint.getOrigin())).getStationLoc()==StationLocation.NORTHERNMOST)&NtoS){
                 for (model.Route endpoint:claimedRoutes){
-                    System.out.println(((student.Station)endpoint.getDestination()).getStationLoc());
                     if (((student.Station)(endpoint.getDestination())).getStationLoc()==StationLocation.SOUTHWESTERNMOST ||
                             ((student.Station)(endpoint.getDestination())).getStationLoc()==StationLocation.SOUTHEASTERNMOST ||
                             ((student.Station)(endpoint.getDestination())).getStationLoc()==StationLocation.SOUTHERNMOST) {
                         List<model.Station> path = buildPathDFS(startpoint.getOrigin(), endpoint.getDestination());
-                        System.out.println(path);
                         if (path != null) {
                             score += 5*map.getRows();
                             NtoS = false;
-                            System.out.println("North to South Worked");
                         }
                     }
                 }
