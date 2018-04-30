@@ -254,6 +254,7 @@ public class RailroadBaronPlayer implements Player {
                 completed = true;
             }
         }
+        a = 0;
         if (!completed) {
             for (Card c : hand) {
                 if (c!=Card.WILD&&(this.countCardsInHand(c) + this.countCardsInHand(Card.WILD)) >= route.getLength()) {
