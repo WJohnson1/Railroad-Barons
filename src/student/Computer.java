@@ -26,6 +26,7 @@ public class Computer implements Player {
     private model.RailroadMap map;
     private Boolean WtoE = true;
     private Boolean NtoS = true;
+
     /**
      * Construstor for Computer. This determines what type of baron this computer will be.
      * @param i type of case
@@ -50,7 +51,7 @@ public class Computer implements Player {
     }
 
     /**
-     * Sets the map of the computer
+     * Sets the map for the computer, which is used for the bonus points system
      * @param map the map of the computer
      */
     public void setMap(model.RailroadMap map) {
@@ -286,7 +287,6 @@ public class Computer implements Player {
         this.trainPieces = this.trainPieces-route.getLength();
         this.score+=route.getPointValue();
         claimedRoutes.add(route);
-
         route.claim(this.baron);
         alreadyClaimed = true;
         for(model.Route startpoint: claimedRoutes){
@@ -427,15 +427,12 @@ public class Computer implements Player {
      *         or if no path, an empty List.
      */
     private List< model.Station > buildPathDFS( model.Station start, model.Station finish, Set< model.Station > visited ) {
-
         List<model.Station> path = null;
-
         if (start.equals(finish)) {
             path = new LinkedList<>();
             path.add(start);
             return path;
         }
-
         for (model.Station nbr : ((student.Station) start).getOutneighbors()) {
             if (!visited.contains(nbr)) {
                 if (((student.RailroadMap) map).checkifRouteClaimed(start,nbr,this.baron)) {
@@ -448,7 +445,6 @@ public class Computer implements Player {
                 }
             }
         }
-
         return null;
     }
 }

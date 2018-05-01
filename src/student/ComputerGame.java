@@ -235,10 +235,10 @@ public class ComputerGame implements model.RailroadBarons{
     @Override
     public void claimRoute(int row, int col) throws RailroadBaronsException {
         if (getCurrentPlayer().toString().contains("COMPUTER")){
-            ((Computer) getCurrentPlayer()).claimRoute(getRailroadMap().getRoute(row,col));
+            (getCurrentPlayer()).claimRoute(getRailroadMap().getRoute(row,col));
         }
         else{
-            ((RailroadBaronPlayer) getCurrentPlayer()).claimRoute(getRailroadMap().getRoute(row,col));
+            (getCurrentPlayer()).claimRoute(getRailroadMap().getRoute(row,col));
         }
         getRailroadMap().routeClaimed(getRailroadMap().getRoute(row, col));
         for (int i = 0; i < 4; i++) {

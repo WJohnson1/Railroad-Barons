@@ -24,7 +24,7 @@ public class RailroadBaronPlayer implements Player {
     private boolean NtoS = true;
     private boolean WtoE = true;
     /**
-     * Construstor for RailroadBaronPlayer. This determines what type of baron this is.
+     * Constructor for RailroadBaronPlayer. This determines what type of baron this is.
      * @param i type of case
      */
     public  RailroadBaronPlayer(int i){
@@ -46,6 +46,11 @@ public class RailroadBaronPlayer implements Player {
         this.score = 0;
     }
 
+
+    /**
+     * Sets the map for the player that will be used for the bonus score system in the Railroad Barons game
+     * @param map map of the current game.
+     */
     public void setMap(model.RailroadMap map) {
         this.map = map;
     }
@@ -150,7 +155,6 @@ public class RailroadBaronPlayer implements Player {
      */
     @Override
     public int countCardsInHand(model.Card card) {
-
             int count = 0;
             for (int i = 0; i < hand.size(); i++) {
                 if (hand.get(i) == card) {
@@ -278,10 +282,7 @@ public class RailroadBaronPlayer implements Player {
         }
         this.trainPieces = this.trainPieces-route.getLength();
         this.score+=route.getPointValue();
-
         claimedRoutes.add(route);
-
-
         route.claim(this.baron);
         alreadyClaimed = true;
         for(model.Route startpoint: claimedRoutes){
@@ -404,10 +405,7 @@ public class RailroadBaronPlayer implements Player {
      * @return an iteration from start to finish, or null if none exists
      */
     private List< model.Station > buildPathDFS( model.Station startNode, model.Station finishNode ) {
-
         // assumes input check occurs previously
-
-
         // Construct a visited set of all nodes reachable from the start
         Set< model.Station > visited = new HashSet<>();
         //visited.add( startNode );
@@ -425,15 +423,12 @@ public class RailroadBaronPlayer implements Player {
      *         or if no path, an empty List.
      */
     private List< model.Station > buildPathDFS( model.Station start, model.Station finish, Set< model.Station > visited ) {
-
         List<model.Station> path = null;
-
         if (start.equals(finish)) {
             path = new LinkedList<>();
             path.add(start);
             return path;
         }
-
         for (model.Station nbr : ((student.Station) start).getOutneighbors()) {
             if (!visited.contains(nbr)) {
                 if (((student.RailroadMap) map).checkifRouteClaimed(start,nbr,this.baron)) {
@@ -446,7 +441,6 @@ public class RailroadBaronPlayer implements Player {
                 }
             }
         }
-
         return null;
     }
 }
